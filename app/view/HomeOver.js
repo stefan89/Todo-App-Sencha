@@ -1,6 +1,5 @@
 Ext.define('app.view.HomeOver', {
     extend: 'Ext.Panel',
-    //alias: "widget.homereset",
     xtype: 'homeovercard',
 
     config: {
@@ -20,9 +19,6 @@ Ext.define('app.view.HomeOver', {
                     ui: "back",
                     text: "Terug",
                      action: "ButtonBackToHomeClicked"
-                    //handler:function(){
-                     //   Ext.getCmp('homemain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
-                    //}
                 }
             ]
         }

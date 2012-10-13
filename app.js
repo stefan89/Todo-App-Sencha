@@ -7,12 +7,6 @@ Ext.application({
     launch: function() {
         Ext.Viewport.add({
              xclass: 'app.view.Main'
-            //xtype: 'maincard',
-
-
-            //xtype: 'homeovercard',
-            //xtype: 'homecard'
-
         });
     }
 });
