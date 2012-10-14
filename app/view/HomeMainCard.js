@@ -23,5 +23,4 @@ Ext.define('app.view.HomeMainCard', {
             {xtype: 'homeresetcard'}
         ]
     }
-
 });

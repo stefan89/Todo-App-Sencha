@@ -17,7 +17,7 @@ Ext.define('app.view.Home', {
             items: [
                 {
                     xtype: "button",
-                    text:    'Over',
+                    text:    'Extra info',
                     action: 'ButtonHomeOverClicked'
                 },
                 {

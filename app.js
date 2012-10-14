@@ -1,7 +1,7 @@
 Ext.application({
     name: 'app',
 
-    controllers: ['HomeController'],
+    controllers: ['HomeController', 'PersoonController'],
     views: ['Main'],
 
     launch: function() {

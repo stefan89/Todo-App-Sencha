@@ -3,7 +3,8 @@ Ext.define('app.view.Main', {
     xtype: 'maincard',
 
     requires: [
-        'app.view.HomeMainCard'
+        'app.view.HomeMainCard',
+        'app.view.PersoonMainCard'
     ],
 
     config: {
@@ -15,7 +16,8 @@ Ext.define('app.view.Main', {
             }
         },
         items: [
-            { xtype: 'homemaincard'}
+            { xtype: 'homemaincard'},
+            { xtype: 'persoonmaincard'}
         ]
     }
 });

@@ -3,58 +3,39 @@ Ext.define("app.controller.HomeController", {
 
     config: {
         refs: {
-            // We're going to lookup our views by xtype.
             overButton: "button[action=ButtonHomeOverClicked]",
             resetButton: "button[action=ButtonHomeResetClicked]",
             backButton: "button[action=ButtonBackToHomeClicked]"
-
         },
         control: {
             overButton: {
-                tap: "onOverCommand"
+                tap: "changeScreenToOverPage"
             },
 
             resetButton: {
-                // The commands fired by the notes list container.
-                tap: "onResetCommand"
+                tap: "changeScreenToResetPage"
             },
             backButton: {
-                // The commands fired by the notes list container.
-                tap: "onBackCommand"
+                tap: "changeScreenToHomePage"
             }
         }
     },
 
-    onOverCommand: function () {
-        console.log("Op home over knop gedrukt");
-        this.changeScreenToOverPage();
-    },
-
-
-    onResetCommand: function () {
-        console.log("Op home reset knop gedrukt");
-        this.changeScreenToResetPage();
-    },
-
-    onBackCommand: function () {
-        console.log("Op back knop gedrukt");
-        this.changeScreenToHomePage();
-    },
-
     changeScreenToOverPage: function () {
-        console.log("Verander screen!");
+        console.log("Op home over knop gedrukt - verander scherm naar over pagina");
         Ext.getCmp('homemain_card').animateActiveItem(1,{type: 'slide', direction: 'left'});
     },
 
     changeScreenToResetPage: function () {
-        console.log("Verander screen!");
+        console.log("Op home reset knop gedrukt - verander scherm naar reset pagina");
         Ext.getCmp('homemain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
     },
 
     changeScreenToHomePage: function () {
-        console.log("Verander screen!");
+        console.log("Op back knop gedrukt - verander scherm naar Home hoofd");
         Ext.getCmp('homemain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
     },
+
 
 
 // Base Class functions.
