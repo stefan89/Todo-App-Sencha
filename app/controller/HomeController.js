@@ -41,7 +41,7 @@ Ext.define("app.controller.HomeController", {
 // Base Class functions.
     launch: function () {
         this.callParent(arguments);
-        console.log("launch");
+        console.log("launch Home controller");
     },
     init: function () {
         this.callParent(arguments);
