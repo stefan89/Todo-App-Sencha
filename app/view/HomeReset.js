@@ -5,14 +5,13 @@ Ext.define('app.view.HomeReset', {
     config: {
         iconCls: 'home',
         title: 'Home',
-        html: 'Dit is de home reset pagina',
-        style: 'background-color: lightblue',
+        //style: 'background-color: lightblue',
         id:'homereset',
         styleHtmlContent: true,
         items: [{
             docked: 'top',
             xtype: 'toolbar',
-            title: 'Reset pagina',
+            title: 'Reset data',
             items: [
                 {
                     xtype: "button",
@@ -21,6 +20,17 @@ Ext.define('app.view.HomeReset', {
                     action: 'ButtonBackToHomeClicked'
                 }
             ]
+            },
+            {
+                html:   '<p>Hier kunt u de app resetten naar de default instellingen.' +
+                        '<p><b>Let op:</b> alle data zal worden verwijderd.</p>' +
+                        '<p>'
+            },
+            {
+                xtype: "button",
+                ui: "action",
+                text: "Reset app"
+                //action: "resetAppButton"
             }
         ]
     }

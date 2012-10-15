@@ -5,14 +5,13 @@ Ext.define('app.view.HomeOver', {
     config: {
         iconCls: 'home',
         title: 'Home',
-        html: 'Dit is de home over pagina',
-        style: 'background-color: gray',
+        //style: 'background-color: gray',
         id:'homeover',
         styleHtmlContent: true,
         items: [{
             docked: 'top',
             xtype: 'toolbar',
-            title: 'Over pagina',
+            title: 'Over app',
             items: [
                 {
                     xtype: "button",
@@ -21,7 +20,10 @@ Ext.define('app.view.HomeOver', {
                      action: "ButtonBackToHomeClicked"
                 }
             ]
-        }
+            },
+            {
+                html: 'Dit is de home over pagina'
+            }
         ]
     }
 });

@@ -5,7 +5,7 @@ Ext.define('app.view.Home', {
     config: {
         iconCls: 'home',
         title: 'Home',
-        html: 'Dit is de home pagina',
+        html: 'Dit is een mobiele app om een to-do (taken) lijst bij te houden voor meerdere personen.',
         styleHtmlContent: true,
         layout:'card',
         id:'Home',
@@ -17,7 +17,7 @@ Ext.define('app.view.Home', {
             items: [
                 {
                     xtype: "button",
-                    text:    'Extra info',
+                    text:    'Info',
                     action: 'ButtonHomeOverClicked'
                 },
                 {
