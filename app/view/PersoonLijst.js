@@ -1,6 +1,6 @@
 ﻿Ext.define("app.view.PersoonLijst", {
     extend: "Ext.Panel",
-    requires:"Ext.dataview.List",
+    requires: "Ext.dataview.List",
     alias: "widget.persoonlijstcard",
 
     config: {
@@ -22,6 +22,18 @@
             ]
         },
         {
+            docked: 'top',
+            ui: 'light',
+            xtype: 'toolbar',
+            items: [
+                {
+                    xtype: 'searchfield',
+                    placeHolder: 'Zoek persoon...',
+                    name: 'searchfield'
+                }
+            ]
+        },
+        {
             xtype: "list",
             store: "DataStore",
             itemId:"persoonLijst",
@@ -29,8 +41,8 @@
             emptyText: "<div class=\"persoon-list-empty-text\">Geen personen gevonden.</div>",
             onItemDisclosure: true,
             grouped: true,
-            itemTpl: "<div class=\"list-item-title\">{voorNaam}</div>" +
-                     "<div class=\"list-item-narrative\">{achterNaam}</div>"
+            itemTpl: "<div class=\"list-item-title\"><b>{voorNaam} {achterNaam}</b></div>" +
+                     "<div class=\"list-item-narrative\">{email}</div>"
         }],
         listeners: [{
             delegate: "#nieuwPersoonButton",
@@ -47,7 +59,7 @@
         this.fireEvent("nieuwPersoonCommand", this);
     },
     onPersoonLijstDisclose: function (list, record, target, index, evt, options) {
-        console.log("wijzigPersoonCommand");
-        this.fireEvent('wijzigPersoonCommand', this, record);
+        console.log("detailsPersoonCommand");
+        this.fireEvent('detailsPersoonCommand', this, record);
     }
 });

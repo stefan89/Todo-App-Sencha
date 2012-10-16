@@ -3,23 +3,32 @@ Ext.define("app.controller.HomeController", {
 
     config: {
         refs: {
-            overButton: "button[action=ButtonHomeOverClicked]",
-            resetButton: "button[action=ButtonHomeResetClicked]",
-            backButton: "button[action=ButtonBackToHomeClicked]"
+            overPageButton: "button[action=ButtonHomeOverClicked]",
+            resetPageButton: "button[action=ButtonHomeResetClicked]",
+            backButton: "button[action=ButtonBackToHomeClicked]",
+            resetDataButton: "button[action=ButtonResetDataClicked]"
         },
         control: {
-            overButton: {
+            overPageButton: {
                 tap: "changeScreenToOverPage"
             },
 
-            resetButton: {
+            resetPageButton: {
                 tap: "changeScreenToResetPage"
             },
             backButton: {
                 tap: "changeScreenToHomePage"
+            },
+            resetDataButton: {
+                tap: "resetAllData"
             }
+
         }
     },
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Home handlers/functions                                                                                     //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     changeScreenToOverPage: function () {
         console.log("Op home over knop gedrukt - verander scherm naar over pagina");
@@ -31,10 +40,38 @@ Ext.define("app.controller.HomeController", {
         Ext.getCmp('homemain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
     },
 
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Home Reset handlers/functions                                                                               //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    resetAllData: function() {
+        console.log("Reset all data");
+
+        var dataStore = Ext.getStore("DataStore");
+        dataStore.removeAll();
+
+        Ext.Msg.alert('Succes', 'Resetten van alle data is gelukt', Ext.emptyFn);
+    },
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Algemene handlers/functions                                                                                 //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     changeScreenToHomePage: function () {
         console.log("Op back knop gedrukt - verander scherm naar Home hoofd");
         Ext.getCmp('homemain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
     },
+
+
+
 
 
 

@@ -29,8 +29,8 @@ Ext.define('app.view.HomeReset', {
             {
                 xtype: "button",
                 ui: "action",
-                text: "Reset app"
-                //action: "resetAppButton"
+                text: "Reset app",
+                action: "ButtonResetDataClicked"
             }
         ]
     }

@@ -2,23 +2,26 @@
     extend: "Ext.data.Store",
     requires: "Ext.data.proxy.LocalStorage",
     config: {
-        model: "app.model.DataModel",
+        model: "app.model.PersoonModel",
         proxy: {
             type: 'localstorage',
             id: 'todo-app-store'
         },
-        sorters: [{ property: 'dateCreated', direction: 'DESC'}],
+        sorters: [{ property: 'achterNaam', direction: 'ASC'}],
         grouper: {
-            sortProperty: "dateCreated",
-            direction: "DESC",
+            sortProperty: "achterNaam",
+            direction: "ASC",
             groupFn: function (record) {
-
-                if (record && record.data.dateCreated) {
-                    return record.data.dateCreated.toDateString();
-                } else {
-                    return '';
-                }
             }
         }
     }
 });
+
+
+//groupFn: function (record) {
+//if (record && record.data.dateCreated) {
+//    return record.data.dateCreated.toDateString();
+//} else {
+//    return '';
+//}
+//}

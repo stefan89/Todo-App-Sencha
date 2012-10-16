@@ -1,7 +1,7 @@
 Ext.application({
     name: 'app',
 
-    models: ['DataModel'],
+    models: ['PersoonModel', 'TodoModel'],
     stores: ['DataStore'],
     controllers: ['HomeController', 'PersoonController'],
     views: ['Main'],

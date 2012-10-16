@@ -4,7 +4,8 @@ Ext.define('app.view.PersoonMainCard', {
     requires: [
         //'app.view.NotesList',
         'app.view.PersoonEditor',
-        'app.view.PersoonLijst'
+        'app.view.PersoonLijst',
+        'app.view.PersoonDetails'
     ],
 
     config: {
@@ -19,7 +20,8 @@ Ext.define('app.view.PersoonMainCard', {
         id:'persoonmain_card',
         items: [
             {xtype: 'persoonlijstcard'},
-            {xtype: 'persooneditcard'}
+            {xtype: 'persooneditcard'},
+            {xtype: 'persoondetailscard'}
 
 
             //{xtype: 'noteeditor'}
