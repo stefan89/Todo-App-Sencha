@@ -1,11 +1,6 @@
 ﻿Ext.define("app.view.PersoonEditor", {
     extend: "Ext.form.Panel",
     requires: 'Ext.form.FieldSet',
-       // [
-            //'app.view.viewcomponents.NumberTextfield'
-       // ],
-
-
     alias: "widget.persooneditcard",
     config: {
         scrollable: 'vertical',
@@ -59,10 +54,27 @@
                     },
                     {
                         xtype: 'datepickerfield',
+                        picker:{xtype:'datepicker', slotOrder:["day", "month", "year"], value: new Date(1970, 0, 1), yearFrom: 1920},
+                        dateFormat:'d-m-Y',
                         name: 'geboorteDatum',
                         label: 'Geboortedatum',
                         required: true,
-                        placeHolder: 'Vul hier de geboortedatum in..'
+                        placeHolder: 'Vul hier de geboortedatum in..',
+                        listeners:{
+                            change:function(picker){
+                                var datumVandaag = new Date();
+                                var minimumdatum = new Date(datumVandaag.getFullYear()-18, datumVandaag.getMonth(), datumVandaag.getDate());
+                                var selecteddatum = this.getValue();
+                                if (selecteddatum > minimumdatum){
+                                    console.log("Jonger dan 18");
+                                    Ext.Msg.alert('Oops!', 'Minimum leeftijd is 18 jaar', Ext.emptyFn);
+                                    picker.reset();
+                                }
+                                else if (selecteddatum <= minimumdatum){
+                                    console.log("Ouder of gelijk aan 18");
+                                }
+                            }
+                        }
                     },
                     {
                         xtype: 'emailfield',
@@ -72,10 +84,11 @@
                         placeHolder: 'Vul hier het e-mailadres in..'
                     },
                     {
-                        //xtype: 'numtextfield',
+                        // xtype: 'numberfield',
                         xtype: 'textfield',
                         name: 'telefoonNummer',
                         label: 'Telefoonnummer',
+                        required: false,
                         placeHolder: 'Vul hier het telefoonnummer in..'
                     }
                 ]
@@ -110,10 +123,6 @@
         this.fireEvent("backToPersoonHomeCommand", this);
     }
 });
-
-
-
-
 
 
 //{

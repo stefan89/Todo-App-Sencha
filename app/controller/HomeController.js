@@ -48,12 +48,18 @@ Ext.define("app.controller.HomeController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     resetAllData: function() {
-        console.log("Reset all data");
 
-        var dataStore = Ext.getStore("DataStore");
-        dataStore.removeAll();
-
-        Ext.Msg.alert('Succes', 'Resetten van alle data is gelukt', Ext.emptyFn);
+        Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
+            if (msg == "yes"){
+                console.log("Data reset");
+                var dataStore = Ext.getStore("DataStore");
+                dataStore.removeAll();
+                dataStore.sync();
+            }
+            else{
+                console.log("Data niet reset");
+            }
+        });
     },
 
 

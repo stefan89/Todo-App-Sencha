@@ -12,7 +12,6 @@
             { name: 'telefoonNummer', type: 'string' }
         ],
         validations: [
-
             { type: 'presence', field: 'email' },
             { type: 'presence', field: 'voorNaam', message: 'Voer een voornaam in voor deze persoon' },
             { type: 'presence', field: 'achterNaam', message: 'Voer een achternaam in voor deze persoon' },
@@ -23,14 +22,16 @@
             { type: 'length', field: 'voorNaam', min: 2, max: 50, message: 'Voornaam is minimaal 2 en maximaal 5 tekens'},
             { type: 'length', field: 'achterNaam', min: 2, max: 50, message: 'Achternaam is minimaal 2 en maximaal 5 tekens'},
             { type: 'inclusion', list: ['Man', 'Vrouw'], field: 'geslacht', message: 'Voer een geldig geslacht in' },
-            { type: 'format', field: 'telefoonNummer', matcher: /[0-9]*/}
+            { type: 'format', field: 'telefoonNummer', matcher: /[0-9]{0,20}/}
         ],
         hasMany: [{ model: 'app.model.TodoModel' }]
     }
 });
 
+//^[0-9]*$
+//[0-9]{0,20}
 //{ name: 'id', type: 'int' },
 //{ name: 'dateCreated', type: 'date', dateFormat: 'c' },
-
 //{ type: 'presence', field: 'id' },
 //{ type: 'presence', field: 'dateCreated' },
+//{ type: 'length', field: 'telefoonNummer',ming: 0, max: 20, message: 'Telefoonnummer is te lang'}

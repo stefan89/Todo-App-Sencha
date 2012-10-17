@@ -29,7 +29,8 @@
                 {
                     xtype: 'searchfield',
                     placeHolder: 'Zoek persoon...',
-                    name: 'searchfield'
+                    name: 'searchfield',
+                    itemId: 'zoekVeld'
                 }
             ]
         },
@@ -45,14 +46,27 @@
                      "<div class=\"list-item-narrative\">{email}</div>"
         }],
         listeners: [{
-            delegate: "#nieuwPersoonButton",
-            event: "tap",
-            fn: "onNieuwButtonTap"
-        }, {
-            delegate: "#persoonLijst",
-            event: "disclose",
-            fn: "onPersoonLijstDisclose"
-        }]
+                delegate: "#nieuwPersoonButton",
+                event: "tap",
+                fn: "onNieuwButtonTap"
+            },
+            {
+                delegate: "#persoonLijst",
+                event: "disclose",
+                fn: "onPersoonLijstDisclose"
+            },
+            {
+                delegate: "#zoekVeld",
+                event: "keyup",
+                fn: "onZoeken"
+            },
+            {
+                delegate: "#zoekVeld",
+                event: "clearicontap",
+                fn: "onStopZoeken"
+            }
+
+        ]
     },    
     onNieuwButtonTap: function () {
         console.log("nieuwPersoonCommand");
@@ -61,5 +75,13 @@
     onPersoonLijstDisclose: function (list, record, target, index, evt, options) {
         console.log("detailsPersoonCommand");
         this.fireEvent('detailsPersoonCommand', this, record);
+    },
+    onZoeken: function (field) {
+       // console.log("typennnnn");
+        //console.log(field.getValue());
+        this.fireEvent("zoekCommand", this, field);
+    },
+    onStopZoeken: function(){
+        this.fireEvent("stopZoekCommand", this);
     }
 });

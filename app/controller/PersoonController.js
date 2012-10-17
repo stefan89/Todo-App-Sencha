@@ -9,7 +9,9 @@
         control: {
             persoonLijstCard: {
                 nieuwPersoonCommand: "onNieuwPersoonCommand",
-                detailsPersoonCommand: "onDetailsPersoonCommand"
+                detailsPersoonCommand: "onDetailsPersoonCommand",
+                zoekCommand: "onZoekCommand",
+                stopZoekCommand: "onStopZoekCommand"
             },
             persoonEditCard: {
                 opslaanPersoonCommand: "onOpslaanPersoonCommand",
@@ -32,10 +34,10 @@
 
         var now = new Date();
         var nieuwPersoon = Ext.create("app.model.PersoonModel", {
+            email: "",
             voorNaam: "",
             achterNaam: "",
             geslacht: "Man",
-            email: "",
             geboorteDatum: "",
             telefoonNummer: ""
 
@@ -55,6 +57,32 @@
     },
 
 
+    onZoekCommand: function(input, field) {
+        queryString = field.getValue();
+
+        var store = Ext.getStore('DataStore');
+        store.clearFilter();
+
+        if(queryString){
+            var thisRegEx = new RegExp(queryString, "i");
+            store.filterBy(function(record) {
+                if (thisRegEx.test(record.get('voorNaam')) ||
+                    thisRegEx.test(record.get('achterNaam')) ||
+                    thisRegEx.test(record.get('email'))) {
+                    return true;
+                };
+                return false;
+            });
+        }
+    },
+
+
+    onStopZoekCommand: function() {
+        var store = Ext.getStore('DataStore');
+        store.clearFilter();
+    },
+
+
     activatePersoonDetailsCard: function (record) {
         var persoonDetailsCard = this.getPersoonDetailsCard();
         persoonDetailsCard.setRecord(record); // load() is deprecated.
@@ -64,6 +92,7 @@
 
     activatePersoonEditorCard: function (record) {
         var persoonEditorCard = this.getPersoonEditCard();
+
         persoonEditorCard.setRecord(record); // load() is deprecated.
         Ext.getCmp('persoonmain_card').animateActiveItem(1,{type: 'slide', direction: 'left'});
     },
@@ -94,27 +123,24 @@
 
         if (!errors.isValid()) {
             Ext.Msg.alert('Wacht!', errors.getByField("voorNaam")[0].getMessage(), Ext.emptyFn);
-            //Ext.Msg.alert('Wacht!', errors.getByField("achterNaam")[1].getMessage(), Ext.emptyFn);
             currentPersoon.reject();
             return;
         }
 
         var persoonStore = Ext.getStore("DataStore");
 
+        if (null == persoonStore.findRecord('email', newValues.email)){
+                persoonStore.add(currentPersoon);
+                persoonStore.sync();
+                persoonStore.sort([{ property: 'achterNaam', direction: 'ASC'}]);
 
-
-        if (null == persoonStore.findRecord('email', currentPersoon.data.email)) {
-            persoonStore.add(currentPersoon);
-            Ext.Msg.alert('Gelukt!', 'Persoon succesvol opgeslagen', Ext.emptyFn);
-
-            persoonStore.sync();
-            persoonStore.sort([{ property: 'achterNaam', direction: 'ASC'}]);
-            this.activatePersoonLijstCard();
-        }
-        else{
-            Ext.Msg.alert('Foutje!', 'Emailadres bestaat al', Ext.emptyFn);
+                Ext.Msg.alert('Gelukt!', 'Persoon succesvol opgeslagen', function() {});
+                this.activatePersoonLijstCard();
         }
 
+        else if (null != persoonStore.findRecord('email', newValues.email)){
+            Ext.Msg.alert('Mistlukt!', 'E-mailadres al in gebruik', Ext.emptyFn);
+        }
     },
 
 
@@ -140,7 +166,6 @@
     },
 
 
-
     // Base Class functions.
     launch: function () {
         this.callParent(arguments);
@@ -153,8 +178,6 @@
         console.log("init");
     }
 });
-
-
 
 
 
@@ -176,3 +199,33 @@
 //    persoonStore.sync();
 //    this.activatePersoonLijstCard();
 //},
+
+
+
+
+
+//if (null == persoonStore.findRecord('email', currentPersoon.data.email)) {
+//    persoonStore.add(currentPersoon);
+//    Ext.Msg.alert('Gelukt!', 'Persoon succesvol opgeslagen', Ext.emptyFn);
+//    persoonStore.sync();
+//   persoonStore.sort([{ property: 'achterNaam', direction: 'ASC'}]);
+
+//}
+
+
+
+
+
+
+// if (null != persoonStore.findRecord('email', currentPersoon.data.email)) {
+//persoonStore.add(currentPersoon);
+//     Ext.Msg.alert('Foutje!', 'Emailadres bestaat al', Ext.emptyFn);
+//  persoonStore.sync();
+//  persoonStore.sort([{ property: 'achterNaam', direction: 'ASC'}]);
+//this.activatePersoonLijstCard();
+// }
+//}
+// else{
+//    Ext.Msg.alert('Foutje!', 'Emailadres bestaat al', Ext.emptyFn);
+//}
+//this.activatePersoonLijstCard();

@@ -48,9 +48,10 @@ Ext.define("app.view.PersoonDetails", {
                         clearIcon: true
                     },
                     {
-                        xtype: 'textfield',
+                        xtype: 'datepickerfield',
                         name: 'geboorteDatum',
                         label: 'Geboortedatum',
+                        dateFormat:'d-m-Y',
                         readOnly:true,
                         clearIcon: true
                     },
