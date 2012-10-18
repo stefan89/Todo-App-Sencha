@@ -5,7 +5,7 @@
         model: "app.model.PersoonModel",
         proxy: {
             type: 'localstorage',
-            id: 'todo-app-store'
+            id: 'todo-app-persoonstore'
         },
         sorters: [{ property: 'achterNaam', direction: 'ASC'}],
         grouper: {

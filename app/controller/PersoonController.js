@@ -39,7 +39,8 @@
             achterNaam: "",
             geslacht: "Man",
             geboorteDatum: "",
-            telefoonNummer: ""
+            telefoonNummer: "",
+            displayNaam: ""
 
         });
         this.activatePersoonEditorCard(nieuwPersoon);
@@ -111,6 +112,11 @@
         var currentPersoon = persoonEditorCard.getRecord();
         var newValues = persoonEditorCard.getValues();
 
+        //fill displaynaam
+        var voorN = newValues.voorNaam;
+        var achterN = newValues.achterNaam;
+        var displayNaamNieuw = (voorN + " " + achterN);
+
         // Update the current persoon fields with form values.
         currentPersoon.set("voorNaam", newValues.voorNaam);
         currentPersoon.set("achterNaam", newValues.achterNaam);
@@ -118,6 +124,7 @@
         currentPersoon.set("geboorteDatum", newValues.geboorteDatum);
         currentPersoon.set("geslacht", newValues.geslacht);
         currentPersoon.set("telefoonNummer", newValues.telefoonNummer);
+        currentPersoon.set("displayNaam", displayNaamNieuw);
 
         var errors = currentPersoon.validate();
 
