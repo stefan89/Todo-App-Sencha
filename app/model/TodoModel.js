@@ -6,10 +6,19 @@ Ext.define("app.model.TodoModel", {
             { name: 'todoId', type: 'int' },
             { name: 'email', type: 'string' },
             { name: 'korteOmschrijving', type: 'string' },
-            { name: 'status', type: 'string' }
+            { name: 'langeOmschrijving', type: 'string' },
+            { name: 'datum', type: 'date' },
+            { name: 'urgentie', type: 'int' },
+            { name: 'plaatsOplevering', type: 'string' },
+            { name: 'status', type: 'string' },
+            { name: 'type', type: 'string' }
         ],
+        belongsTo: {
+            model: 'app.model.PersoonModel',
+            foreignKey: 'email'
+        },
         validations: [
-            { type: 'presence', field: 'todoId', message: 'Blabla' },
+            { type: 'presence', field: 'todoId'},
             { type: 'presence', field: 'email', message: 'Blabla' },
             { type: 'presence', field: 'korteOmschrijving', message: 'Blabla' },
             { type: 'presence', field: 'status', message: 'Blabla' }

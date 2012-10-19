@@ -30,6 +30,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'voorNaam',
                         label: 'Voornaam',
+                        labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
                     },
@@ -37,6 +38,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'achterNaam',
                         label: 'Achternaam',
+                        labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
                     },
@@ -44,6 +46,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'geslacht',
                         label: 'Geslacht',
+                        labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
                     },
@@ -51,6 +54,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'datepickerfield',
                         name: 'geboorteDatum',
                         label: 'Geboortedatum',
+                        labelAlign: 'top',
                         dateFormat:'d-m-Y',
                         readOnly:true,
                         clearIcon: true
@@ -59,6 +63,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'email',
                         label: 'Email',
+                        labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
                     },
@@ -66,6 +71,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'telefoonNummer',
                         label: 'Telefoonnummer',
+                        labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
                     }

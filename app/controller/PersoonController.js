@@ -33,7 +33,10 @@
         console.log("onNieuwPersoonCommand");
 
         var now = new Date();
+        var id = (now.getTime()).toString() + (this.getRandomInt(0, 100)).toString();
+
         var nieuwPersoon = Ext.create("app.model.PersoonModel", {
+            persoonId: id,
             email: "",
             voorNaam: "",
             achterNaam: "",

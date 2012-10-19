@@ -25,6 +25,7 @@
                         xtype: 'textfield',
                         name: 'voorNaam',
                         label: 'Voornaam',
+                        labelAlign: 'top',
                         required: true,
                         placeHolder: 'Vul hier de voornaam in..'
                     },
@@ -32,6 +33,7 @@
                         xtype: 'textfield',
                         name: 'achterNaam',
                         label: 'Achternaam',
+                        labelAlign: 'top',
                         required: true,
                         placeHolder: 'Vul hier de achternaam in..'
                     },
@@ -39,6 +41,7 @@
                         xtype: 'selectfield',
                         name: 'geslacht',
                         label: 'Geslacht',
+                        labelAlign: 'top',
                         required: true,
                         placeHolder: 'Vul hier het geslacht in..',
                         options: [
@@ -58,6 +61,7 @@
                         dateFormat:'d-m-Y',
                         name: 'geboorteDatum',
                         label: 'Geboortedatum',
+                        labelAlign: 'top',
                         required: true,
                         placeHolder: 'Vul hier de geboortedatum in..',
                         listeners:{
@@ -80,14 +84,15 @@
                         xtype: 'emailfield',
                         name: 'email',
                         label: 'Email',
+                        labelAlign: 'top',
                         required: true,
                         placeHolder: 'Vul hier het e-mailadres in..'
                     },
                     {
-                        // xtype: 'numberfield',
                         xtype: 'textfield',
                         name: 'telefoonNummer',
                         label: 'Telefoonnummer',
+                        labelAlign: 'top',
                         required: false,
                         placeHolder: 'Vul hier het telefoonnummer in..'
                     }

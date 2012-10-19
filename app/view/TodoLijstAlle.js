@@ -27,25 +27,56 @@ Ext.define("app.view.TodoLijstAlle", {
                 }
             ]
         },
-            //{
-             //   docked: 'top',
-             //   ui: 'light',
-             //   xtype: 'toolbar',
-             //   items: [
-             //       {
-             //           xtype: 'searchfield',
-            //            placeHolder: "Zoek xtodo's...",
-            //            name: 'searchfield2'
-            //            //: 'zoekVeld'
-            //        }
-            //    ]
-            //},
+            {
+                xtype: 'toolbar',
+                ui: 'light',
+                docked: 'top',
+                //align: 'center',
+                items: [
+                    {
+                        xtype: 'segmentedbutton',
+                        allowDepress: false,
+                        items: [
+                            {
+                                text: 'Alle',
+                                pressed: true,
+                                itemId: "alleTodoButton"
+                            },
+                            {
+                                text: 'Prive',
+                                itemId: "priveTodoButton"
+                            },
+                            {
+                                text: 'Zakelijk',
+                                itemId: "zakelijkTodoButton"
+                            }
+                        ]
+                    }
+
+                ]
+            },
+            {
+                xtype: 'toolbar',
+                ui: 'light',
+                docked: 'top',
+                align: 'center',
+                items: [
+                    {
+                        xtype: 'searchfield',
+                        placeHolder: "Zoek to-do's...",
+                        name: 'searchfieldAlle'
+                        //: 'zoekVeld'
+                    }
+
+
+                ]
+            },
             {
                 xtype: "list",
                 store: "TodoStore",
                 itemId:"todoAlleLijst",
                 loadingText: "Todo's laden...",
-                emptyText: "<div class=\"todo-list-empty-text\">Geen todos gevonden.</div>",
+                emptyText: "<div class=\"todo-list-empty-text\">Geen todo's gevonden met deze status en type</div>",
                 onItemDisclosure: true,
                 grouped: true,
                 itemTpl:    "<div class=\"list-item-title\"><b>{korteOmschrijving}</b></div>" +
@@ -76,6 +107,21 @@ Ext.define("app.view.TodoLijstAlle", {
                 event: "tap",
                 fn: "onTerugToTodoHome"
 
+            },
+            {
+                delegate: "#alleTodoButton",
+                event: "tap",
+                fn: "onAlleTodoButton"
+            },
+            {
+                delegate: "#priveTodoButton",
+                event: "tap",
+                fn: "onPriveTodoButton"
+            },
+            {
+                delegate: "#zakelijkTodoButton",
+                event: "tap",
+                fn: "onZakelijkTodoButton"
             }
 
         ]
@@ -99,6 +145,22 @@ Ext.define("app.view.TodoLijstAlle", {
     onTerugToTodoHome: function(){
         console.log("onTerugToTodoHomeCommand");
         this.fireEvent("backToTodoHomeCommand", this);
+    },
+
+
+
+    //////FILTERS
+    onAlleTodoButton: function(){
+        console.log("Alle!");
+        this.fireEvent("alleTodoCommand", this);
+    },
+    onPriveTodoButton: function(){
+        console.log("Prive!");
+        this.fireEvent("priveTodoCommand", this);
+    },
+    onZakelijkTodoButton: function(){
+        console.log("Zakelijk!");
+        this.fireEvent("zakelijkTodoCommand", this);
     }
 
 });

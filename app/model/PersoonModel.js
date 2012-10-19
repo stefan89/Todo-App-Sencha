@@ -1,8 +1,9 @@
 ﻿Ext.define("app.model.PersoonModel", {
     extend: "Ext.data.Model",
     config: {
-        idProperty: 'email',
+        idProperty: 'persoonId',
         fields: [
+            { name: 'persoonId', type: 'int' },
             { name: 'voorNaam', type: 'string' },
             { name: 'achterNaam', type: 'string' },
             { name: 'email', type: 'string' },
@@ -11,8 +12,13 @@
             { name: 'telefoonNummer', type: 'string' },
             { name: 'displayNaam', type: 'string' }
         ],
+        hasMany: {
+                model: 'app.model.TodoModel',
+                name:'todos'
+        },
         validations: [
-            { type: 'presence', field: 'email' },
+            { type: 'presence', field: 'persoonId' },
+            { type: 'presence', field: 'email', message: 'Blablabla'  },
             { type: 'presence', field: 'voorNaam', message: 'Voer een voornaam in voor deze persoon' },
             { type: 'presence', field: 'achterNaam', message: 'Voer een achternaam in voor deze persoon' },
             { type: 'presence', field: 'geslacht', message: 'Selecteer een geslacht voor deze persoon' },
