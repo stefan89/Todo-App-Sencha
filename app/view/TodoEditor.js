@@ -49,28 +49,29 @@ Ext.define("app.view.TodoEditor", {
                     },
                     {
                         xtype: 'datepickerfield',
-                        picker:{xtype:'datepicker', slotOrder:["day", "month", "year"], value: new Date(), yearFrom: 2012},
+                        picker:{xtype:'datepicker', slotOrder:["day", "month", "year"], value: new Date(), yearFrom: 2012, yearTo: 2020},
                         dateFormat:'d-m-Y',
                         name: 'datum',
                         label: 'Datum oplevering',
                         labelAlign: 'top',
                         required: true,
-                        placeHolder: 'Vul hier de datum in..'//,
-                        //listeners:{
-                        //change:function(picker){
-                        //    var datumVandaag = new Date();
-                        //    var minimumdatum = new Date(datumVandaag.getFullYear()-18, datumVandaag.getMonth(), datumVandaag.getDate());
-                         //   var selecteddatum = this.getValue();
-                         //   if (selecteddatum > minimumdatum){
-                         //       console.log("Jonger dan 18");
-                         //       Ext.Msg.alert('Oops!', 'Minimum leeftijd is 18 jaar', Ext.emptyFn);
-                         //       picker.reset();
-                        //    }
-                         //   else if (selecteddatum <= minimumdatum){
-                         //       console.log("Ouder of gelijk aan 18");
-                         //   }
-                       // }
-                    //}
+                        placeHolder: 'Vul hier de datum in..',
+                        listeners:{
+                        change:function(picker){
+                            var datumVandaag = new Date();
+                            var minimumdatum = new Date(datumVandaag.getFullYear(), datumVandaag.getMonth(), datumVandaag.getDate());
+
+                            var selecteddatum = this.getValue();
+                            if (selecteddatum < minimumdatum){
+                                console.log("Datum afgekeurd");
+                                Ext.Msg.alert('Oops!', 'Datum afgekeurd', Ext.emptyFn);
+                                picker.reset();
+                            }
+                            else if (selecteddatum >= minimumdatum){
+                                console.log("Datum is gelijk of later dan vandaag");
+                            }
+                        }
+                    }
                     },
 
                     {
@@ -109,7 +110,6 @@ Ext.define("app.view.TodoEditor", {
                             }
                         ]
                     }
-                    //prive of zakelijk hier!!!!!!!!!!!!!!!!
                 ]
             },
             {
