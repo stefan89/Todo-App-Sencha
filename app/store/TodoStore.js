@@ -12,6 +12,11 @@ Ext.define("app.store.TodoStore", {
             sortProperty: "korteOmschrijving",
             direction: "ASC",
             groupFn: function (record) {
+                if (record && record.data.datum) {
+                    return record.data.datum.toDateString();
+                } else {
+                    return '';
+                }
             }
         }
     }

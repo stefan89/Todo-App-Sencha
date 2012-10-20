@@ -83,7 +83,7 @@ Ext.define("app.view.TodoLijstOnderhanden", {
                 onItemDisclosure: true,
                 grouped: true,
                 itemTpl:    "<div class=\"list-item-title\"><b>{korteOmschrijving}</b></div>" +
-                    "<div class=\"list-item-narrative\">{email}</div>"
+                            "<div class=\"list-item-narrative\">E-mail persoon: <b>{email}</b> - urgentie: <b>{urgentie}</b></div>"
             }],
         listeners: [{
             delegate: "#nieuwTodoButton",

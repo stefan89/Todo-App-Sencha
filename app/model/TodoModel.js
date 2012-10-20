@@ -21,7 +21,11 @@ Ext.define("app.model.TodoModel", {
             { type: 'presence', field: 'todoId'},
             { type: 'presence', field: 'email', message: 'Blabla' },
             { type: 'presence', field: 'korteOmschrijving', message: 'Blabla' },
-            { type: 'presence', field: 'status', message: 'Blabla' }
+            { type: 'presence', field: 'datum', message: 'Blabla' },
+            { type: 'presence', field: 'urgentie', message: 'Blabla' },
+            { type: 'presence', field: 'plaatsOplevering', message: 'Blabla' },
+            { type: 'presence', field: 'status', message: 'Blabla' },
+            { type: 'presence', field: 'type', message: 'Blabla' }
         ]
     }
 });

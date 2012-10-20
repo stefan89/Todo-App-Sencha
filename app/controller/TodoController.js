@@ -62,22 +62,31 @@ Ext.define("app.controller.TodoController", {
     onNieuweTodoButtonCommand: function(){
         console.log("NIEUWE TODO PAGINA OPENEN");
 
-        var now = new Date();
-        var id = (now.getTime()).toString() + (this.getRandomInt(0, 100)).toString();
+        var store = Ext.getStore('DataStore');
+        var aantalPersoonRecords = store.getCount();
 
-        var nieuweTodo = Ext.create("app.model.TodoModel", {
-            todoId: id,
-            email: "",
-            korteOmschrijving: "",
-            langeOmschrijving: "",
-            datum: now,
-            urgentie: "1",
-            plaatsOplevering: "",
-            status: "Onderhanden",
-            type: "Prive"
+        if (aantalPersoonRecords > 0){
+            var dataFirstPersoonRow = store.first().getData();
+            var mail = dataFirstPersoonRow.email;
+            var now = new Date();
+            var id = (now.getTime()).toString() + (this.getRandomInt(0, 100)).toString();
 
+            var nieuweTodo = Ext.create("app.model.TodoModel", {
+                todoId: id,
+                email: "mail",
+                korteOmschrijving: "",
+                langeOmschrijving: "",
+                datum: now,
+                urgentie: "1",
+                plaatsOplevering: "",
+                status: "Onderhanden",
+                type: "Prive"
         });
-        this.activateTodoEditorCard(nieuweTodo);
+            this.activateTodoEditorCard(nieuweTodo);
+        }
+        else{
+            Ext.Msg.alert('Wacht!', 'Er is nog geen persoon toegevoegd. Dit dient eerst te gebeuren', Ext.emptyFn);
+        }
     },
 
     getRandomInt: function (min, max) {
