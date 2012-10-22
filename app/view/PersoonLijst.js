@@ -36,7 +36,7 @@
         },
         {
             xtype: "list",
-            store: "DataStore",
+            store: "PersoonStore",
             itemId:"persoonLijst",
             loadingText: "Personen laden...",
             emptyText: "<div class=\"persoon-list-empty-text\">Geen personen gevonden.</div>",

@@ -26,7 +26,7 @@ Ext.define("app.view.TodoEditor", {
                         label: 'Persoon voor wie de to-do is',
                         labelAlign: 'top',
                         name: 'email',
-                        store: 'DataStore',
+                        store: 'PersoonStore',
                         displayField: 'displayNaam',
                         valueField: 'email',
                         required: true,

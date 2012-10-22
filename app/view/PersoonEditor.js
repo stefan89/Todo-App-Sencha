@@ -94,7 +94,23 @@
                         label: 'Telefoonnummer',
                         labelAlign: 'top',
                         required: false,
-                        placeHolder: 'Vul hier het telefoonnummer in..'
+                        placeHolder: 'Vul hier het telefoonnummer in..',
+                        listeners:{
+                            change:function(field){
+                                var x = this.getValue();
+                               // console.log(textfield);
+                                console.log(x);
+                                //(Number(d))
+                                //if (Ext.isNumeric(x)){
+                                //    console.log("AAABCD");
+                                //}
+                               // else{
+                                //    console.log("Geen number");
+                                //    Ext.Msg.alert('Oops!', 'Minimum leeftijd is 18 jaar', Ext.emptyFn);
+                                //    field.reset();
+                               // }
+                            }
+                        }
                     }
                 ]
             },

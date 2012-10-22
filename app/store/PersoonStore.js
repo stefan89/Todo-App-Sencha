@@ -1,4 +1,4 @@
-﻿Ext.define("app.store.DataStore", {
+﻿Ext.define("app.store.PersoonStore", {
     extend: "Ext.data.Store",
     requires: "Ext.data.proxy.LocalStorage",
     config: {

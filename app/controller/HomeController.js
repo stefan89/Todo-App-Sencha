@@ -52,9 +52,9 @@ Ext.define("app.controller.HomeController", {
         Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
             if (msg == "yes"){
                 console.log("Data reset");
-                var dataStore = Ext.getStore("DataStore");
-                dataStore.removeAll();
-                dataStore.sync();
+                var persoonStore = Ext.getStore("PersoonStore");
+                persoonStore.removeAll();
+                persoonStore.sync();
             }
             else{
                 console.log("Data niet reset");

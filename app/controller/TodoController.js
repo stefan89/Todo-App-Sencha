@@ -66,7 +66,7 @@ Ext.define("app.controller.TodoController", {
 
 
     onNieuweTodoButtonCommand: function(){
-        var store = Ext.getStore('DataStore');
+        var store = Ext.getStore('PersoonStore');
         var aantalPersoonRecords = store.getCount();
 
         if (aantalPersoonRecords > 0){

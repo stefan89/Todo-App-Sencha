@@ -64,7 +64,7 @@
     onZoekCommand: function(input, field) {
         queryString = field.getValue();
 
-        var store = Ext.getStore('DataStore');
+        var store = Ext.getStore('PersoonStore');
         store.clearFilter();
 
         if(queryString){
@@ -82,7 +82,7 @@
 
 
     onStopZoekCommand: function() {
-        var store = Ext.getStore('DataStore');
+        var store = Ext.getStore('PersoonStore');
         store.clearFilter();
     },
 
@@ -129,27 +129,34 @@
         currentPersoon.set("telefoonNummer", newValues.telefoonNummer);
         currentPersoon.set("displayNaam", displayNaamNieuw);
 
-        var errors = currentPersoon.validate();
+        if(Ext.isNumeric(newValues.telefoonNummer) || (newValues.telefoonNummer == "")){
+            console.log("Telefoonnummer correct");
 
-        if (!errors.isValid()) {
-            Ext.Msg.alert('Wacht!', errors.getByField("voorNaam")[0].getMessage(), Ext.emptyFn);
-            currentPersoon.reject();
-            return;
+            var errors = currentPersoon.validate();
+
+            if (!errors.isValid()) {
+                Ext.Msg.alert('Wacht!', errors.getByField("voorNaam")[0].getMessage(), Ext.emptyFn);
+                currentPersoon.reject();
+                return;
+            }
+
+            var persoonStore = Ext.getStore("PersoonStore");
+
+            if (null == persoonStore.findRecord('email', newValues.email)){
+                    persoonStore.add(currentPersoon);
+                    persoonStore.sync();
+                    persoonStore.sort([{ property: 'achterNaam', direction: 'ASC'}]);
+
+                    Ext.Msg.alert('Gelukt!', 'Persoon succesvol opgeslagen', function() {});
+                    this.activatePersoonLijstCard();
+            }
+
+            else if (null != persoonStore.findRecord('email', newValues.email)){
+                Ext.Msg.alert('Mistlukt!', 'E-mailadres al in gebruik', Ext.emptyFn);
+            }
         }
-
-        var persoonStore = Ext.getStore("DataStore");
-
-        if (null == persoonStore.findRecord('email', newValues.email)){
-                persoonStore.add(currentPersoon);
-                persoonStore.sync();
-                persoonStore.sort([{ property: 'achterNaam', direction: 'ASC'}]);
-
-                Ext.Msg.alert('Gelukt!', 'Persoon succesvol opgeslagen', function() {});
-                this.activatePersoonLijstCard();
-        }
-
-        else if (null != persoonStore.findRecord('email', newValues.email)){
-            Ext.Msg.alert('Mistlukt!', 'E-mailadres al in gebruik', Ext.emptyFn);
+        else{
+            Ext.Msg.alert('Mistlukt!', 'Geen geldig telefoonnummer ingevoerd', Ext.emptyFn);
         }
     },
 
@@ -179,8 +186,8 @@
     // Base Class functions.
     launch: function () {
         this.callParent(arguments);
-        var dataStore = Ext.getStore("DataStore");
-        dataStore.load();
+        var persoonStore = Ext.getStore("PersoonStore");
+        persoonStore.load();
         console.log("launch Persoon controller");
     },
     init: function () {
@@ -203,7 +210,7 @@
 
 //    var persoonEditorCard = this.getPersoonEditCard();
 //    var currentPersoon = persoonEditorCard.getRecord();
-//    var persoonStore = Ext.getStore("DataStore");
+//    var persoonStore = Ext.getStore("PersoonStore");
 
 //    persoonStore.remove(currentPersoon);
 //    persoonStore.sync();

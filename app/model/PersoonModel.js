@@ -29,7 +29,7 @@
             { type: 'length', field: 'voorNaam', min: 2, max: 50, message: 'Voornaam is minimaal 2 en maximaal 5 tekens'},
             { type: 'length', field: 'achterNaam', min: 2, max: 50, message: 'Achternaam is minimaal 2 en maximaal 5 tekens'},
             { type: 'inclusion', list: ['Man', 'Vrouw'], field: 'geslacht', message: 'Voer een geldig geslacht in' },
-            { type: 'format', field: 'telefoonNummer', matcher: /[0-9]{0,20}/}
+            { type: 'length', field: 'telefoonNummer', max: 20, message: 'Blablabla' }
         ]
     }
 });
