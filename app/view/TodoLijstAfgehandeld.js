@@ -9,6 +9,7 @@ Ext.define("app.view.TodoLijstAfgehandeld", {
         },
         items: [{
             xtype: "toolbar",
+            ui: "light",
             title: "Afgehandelde..",
             docked: "top",
             items: [

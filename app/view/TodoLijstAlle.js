@@ -9,6 +9,7 @@ Ext.define("app.view.TodoLijstAlle", {
         },
         items: [{
             xtype: "toolbar",
+            ui: "light",
             title: "Alle todo's",
             docked: "top",
             items: [

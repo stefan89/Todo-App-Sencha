@@ -7,6 +7,7 @@ Ext.define("app.view.TodoEditor", {
         items: [
             {
                 xtype: "toolbar",
+                ui: "light",
                 docked: "top",
                 title: "Nieuwe todo",
                 items: [

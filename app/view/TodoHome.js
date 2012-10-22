@@ -12,6 +12,7 @@ Ext.define('app.view.TodoHome', {
             {
                 docked: 'top',
                 xtype: 'toolbar',
+                ui: "light",
                 title: "Todo's",
                 items: [
                     {
@@ -28,23 +29,21 @@ Ext.define('app.view.TodoHome', {
                 html: ' ',
                 styleHtmlContent: true,
                 items: [
-                    //{
-                    //    xtype: "button",
-                    //    text:    'Nieuwe xtodo',
-                    //    itemId: "nieuweTodoButton"
-                    //},
                     {
                         xtype: "button",
+                        ui: "knoplijst",
                         text:    "Onderhanden todo's",
                         itemId: "onderhandenTodoButton"
                     },
                     {
                         xtype: "button",
+                        ui: "knoplijst",
                         text:    "Afgehandelde todo's",
                         itemId: "afgehandeldTodoButton"
                     },
                     {
                         xtype: "button",
+                        ui: "knoplijst",
                         text:    "Alle todo's",
                         itemId: "alleTodoButton"
                     }

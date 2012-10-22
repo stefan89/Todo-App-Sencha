@@ -7,6 +7,7 @@ Ext.define("app.view.TodoDetails", {
         items: [
             {
                 xtype: "toolbar",
+                ui: "light",
                 docked: "top",
                 title: "To-do details",
                 items: [

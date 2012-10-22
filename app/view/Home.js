@@ -13,6 +13,7 @@ Ext.define('app.view.Home', {
         {
             docked: 'top',
             xtype: 'toolbar',
+            ui: "light",
             title: 'Home',
             items: [
                 {

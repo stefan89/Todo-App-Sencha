@@ -11,6 +11,7 @@ Ext.define('app.view.HomeOver', {
         items: [{
             docked: 'top',
             xtype: 'toolbar',
+            ui: "light",
             title: 'Over app',
             items: [
                 {

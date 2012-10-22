@@ -9,6 +9,7 @@ Ext.define("app.view.TodoLijstOnderhanden", {
         },
         items: [{
             xtype: "toolbar",
+            ui: "light",
             title: "Onderhanden..",
             docked: "top",
             items: [

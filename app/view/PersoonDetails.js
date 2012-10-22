@@ -7,6 +7,7 @@ Ext.define("app.view.PersoonDetails", {
         items: [
             {
                 xtype: "toolbar",
+                ui: "light",
                 docked: "top",
                 title: "Persoon details",
                 items: [

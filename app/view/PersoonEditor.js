@@ -7,6 +7,7 @@
         items: [
             {
                 xtype: "toolbar",
+                ui: "light",
                 docked: "top",
                 title: "Nieuw persoon",
                 items: [

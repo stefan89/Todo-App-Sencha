@@ -11,6 +11,7 @@ Ext.define('app.view.HomeReset', {
         items: [{
             docked: 'top',
             xtype: 'toolbar',
+            ui: "light",
             title: 'Reset data',
             items: [
                 {

@@ -9,6 +9,7 @@
         },
         items: [{
             xtype: "toolbar",
+            ui: "light",
             title: "Personen",
             docked: "top",
             items: [
@@ -16,7 +17,6 @@
                 {
                     xtype: "button",
                     text: 'Nieuw',
-                    ui: 'action',
                     itemId: "nieuwPersoonButton"
                 }
             ]
