@@ -6,7 +6,8 @@ Ext.define("app.controller.TodoController", {
             todoEditCard : "todoeditcard",
             todoLijstAlleCard: "todolijstallecard",
             todoLijstOnderhandenCard: "todolijstonderhandencard",
-            todoLijstAfgehandeldCard: "todolijstafgehandeldcard"
+            todoLijstAfgehandeldCard: "todolijstafgehandeldcard",
+            todoDetailsCard: "tododetailscard"
         },
 
         control: {
@@ -27,7 +28,8 @@ Ext.define("app.controller.TodoController", {
                 //stopZoekCommand: "onStopZoekCommand"
                 alleTodoCommand: "onAlleAlleTodosButtonCommand",
                 priveTodoCommand: "onAllePriveTodoCommand",
-                zakelijkTodoCommand: "onAlleZakelijkTodoCommand"
+                zakelijkTodoCommand: "onAlleZakelijkTodoCommand",
+                detailsTodoCommand: "onDetailsTodoCommand"
 
             },
             todoLijstOnderhandenCard:{
@@ -37,7 +39,8 @@ Ext.define("app.controller.TodoController", {
                 //stopZoekCommand: "onStopZoekCommand"
                 alleTodoCommand: "onOnderhandenAlleTodosButtonCommand",
                 priveTodoCommand: "onOnderhandenPriveTodoCommand",
-                zakelijkTodoCommand: "onOnderhandenZakelijkTodoCommand"
+                zakelijkTodoCommand: "onOnderhandenZakelijkTodoCommand",
+                detailsTodoCommand: "onDetailsTodoCommand"
             },
             todoLijstAfgehandeldCard:{
                 backToTodoHomeCommand: "onBackToTodoHomeCommand",
@@ -46,8 +49,11 @@ Ext.define("app.controller.TodoController", {
                 //stopZoekCommand: "onStopZoekCommand"
                 alleTodoCommand: "onAfgehandeldAlleTodosButtonCommand",
                 priveTodoCommand: "onAfgehandeldPriveTodoCommand",
-                zakelijkTodoCommand: "onAfgehandeldZakelijkTodoCommand"
-
+                zakelijkTodoCommand: "onAfgehandeldZakelijkTodoCommand",
+                detailsTodoCommand: "onDetailsTodoCommand"
+            },
+            todoDetailsCard: {
+                backToTodoHomeCommand: "onBackToTodoOnderhandenCommand"
             }
         }
     },
@@ -60,8 +66,6 @@ Ext.define("app.controller.TodoController", {
 
 
     onNieuweTodoButtonCommand: function(){
-        console.log("NIEUWE TODO PAGINA OPENEN");
-
         var store = Ext.getStore('DataStore');
         var aantalPersoonRecords = store.getCount();
 
@@ -97,7 +101,6 @@ Ext.define("app.controller.TodoController", {
 
     activateTodoEditorCard: function (record) {
         var todoEditorCard = this.getTodoEditCard();
-
         todoEditorCard.setRecord(record); // load() is deprecated.
         Ext.getCmp('todomain_card').animateActiveItem(1,{type: 'slide', direction: 'left'});
     },
@@ -112,27 +115,20 @@ Ext.define("app.controller.TodoController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onAlleAlleTodosButtonCommand: function(){
-        console.log("ALLE TODO's weergeven");
-
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
         Ext.getCmp('todomain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
     },
 
     onAllePriveTodoCommand: function() {
-        //var queryStatus = "Onderhanden";
         var queryType = "Prive";
-
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
 
         if(queryType){
             var thisRegExType = new RegExp(queryType, "i");
-            //var thisRegExStatus = new RegExp(queryStatus, "i");
             store.filterBy(function(record) {
                 if (thisRegExType.test(record.get('type'))
-                  //  &&
-                  //  thisRegExStatus.test(record.get('status'))
                     ) {
                     return true;
                 };
@@ -142,19 +138,14 @@ Ext.define("app.controller.TodoController", {
     },
 
     onAlleZakelijkTodoCommand: function() {
-        //var queryStatus = "Onderhanden";
         var queryType = "Zakelijk";
-
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
 
         if(queryType){
             var thisRegExType = new RegExp(queryType, "i");
-           // var thisRegExStatus = new RegExp(queryStatus, "i");
             store.filterBy(function(record) {
                 if (thisRegExType.test(record.get('type'))
-                   // &&
-                 //   thisRegExStatus.test(record.get('status'))
                     ) {
                     return true;
                 };
@@ -188,7 +179,6 @@ Ext.define("app.controller.TodoController", {
     onOnderhandenPriveTodoCommand: function() {
         var queryStatus = "Onderhanden";
         var queryType = "Prive";
-
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
 
@@ -210,7 +200,6 @@ Ext.define("app.controller.TodoController", {
     onOnderhandenZakelijkTodoCommand: function() {
         var queryStatus = "Onderhanden";
         var queryType = "Zakelijk";
-
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
 
@@ -230,6 +219,8 @@ Ext.define("app.controller.TodoController", {
     },
 
 
+
+
     //onStopZoekCommand: function() {
     //    var store = Ext.getStore('TodoStore');
     //    store.clearFilter();
@@ -243,8 +234,6 @@ Ext.define("app.controller.TodoController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onAfgehandeldAlleTodosButtonCommand: function(){
-        console.log("ALLE TODO's weergeven");
-
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
         var queryString = "Afgehandeld";
@@ -286,7 +275,6 @@ Ext.define("app.controller.TodoController", {
     onAfgehandeldZakelijkTodoCommand: function() {
         var queryStatus = "Afgehandeld";
         var queryType = "Zakelijk";
-
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
 
@@ -315,15 +303,11 @@ Ext.define("app.controller.TodoController", {
     //todoEditorCard handlers/functions                                                                           //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
     onOpslaanTodoCommand: function(){
-        console.log("Todo opslaan");
-
         var todoEditorCard = this.getTodoEditCard();
         var currentTodo = todoEditorCard.getRecord();
         var newValues = todoEditorCard.getValues();
 
-       // Update the current persoon fields with form values.
         currentTodo.set("email", newValues.email);
         currentTodo.set("korteOmschrijving", newValues.korteOmschrijving);
         currentTodo.set("langeOmschrijving", newValues.langeOmschrijving);
@@ -341,7 +325,6 @@ Ext.define("app.controller.TodoController", {
         }
 
         var todoStore = Ext.getStore("TodoStore");
-
         if (null == todoStore.findRecord('todoId', currentTodo.todoId)){
             todoStore.add(currentTodo);
             todoStore.sync();
@@ -350,13 +333,21 @@ Ext.define("app.controller.TodoController", {
             Ext.Msg.alert('Gelukt!', 'Todo succesvol opgeslagen', function() {});
             this.onOnderhandenAlleTodosButtonCommand();
         }
-
         else if (null != persoonStore.findRecord('todoId', currentTodo.todoId)){
             Ext.Msg.alert('Mistlukt!', 'TodoID bestaat al', Ext.emptyFn);
         }
-
     },
 
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //persoonDetailsCard handlers/functions                                                                       //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    onBackToTodoOnderhandenCommand: function(){
+        this.onBackToTodoHomeCommand();
+    },
 
 
 
@@ -366,8 +357,18 @@ Ext.define("app.controller.TodoController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onBackToTodoHomeCommand: function(){
-        console.log("TERUGGG");
         Ext.getCmp('todomain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
+    },
+
+
+    onDetailsTodoCommand: function (list, record) {
+        this.activateTodoDetailsCard(record);
+    },
+
+    activateTodoDetailsCard: function (record) {
+        var todoDetailsCard = this.getTodoDetailsCard();
+        todoDetailsCard.setRecord(record); // load() is deprecated.
+        Ext.getCmp('todomain_card').animateActiveItem(5,{type: 'slide', direction: 'left'});
     },
 
 
@@ -376,7 +377,7 @@ Ext.define("app.controller.TodoController", {
         this.callParent(arguments);
         var todoStore = Ext.getStore("TodoStore");
         todoStore.load();
-        console.log("launch");
+        console.log("launch Todo controller");
     },
     init: function () {
         this.callParent(arguments);

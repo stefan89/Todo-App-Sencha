@@ -45,7 +45,8 @@
             itemTpl: "<div class=\"list-item-title\"><b>{voorNaam} {achterNaam}</b></div>" +
                      "<div class=\"list-item-narrative\">{email}</div>"
         }],
-        listeners: [{
+        listeners: [
+            {
                 delegate: "#nieuwPersoonButton",
                 event: "tap",
                 fn: "onNieuwButtonTap"
@@ -65,9 +66,8 @@
                 event: "clearicontap",
                 fn: "onStopZoeken"
             }
-
         ]
-    },    
+    },
     onNieuwButtonTap: function () {
         console.log("nieuwPersoonCommand");
         this.fireEvent("nieuwPersoonCommand", this);

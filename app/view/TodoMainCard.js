@@ -6,11 +6,12 @@ Ext.define('app.view.TodoMainCard', {
         'app.view.TodoEditor',
         'app.view.TodoLijstAlle',
         'app.view.TodoLijstOnderhanden',
-        'app.view.TodoLijstAfgehandeld'
+        'app.view.TodoLijstAfgehandeld',
+        'app.view.TodoDetails'
     ],
 
     config: {
-        iconCls: 'star',
+        iconCls: 'bookmarks',
         title: 'Todo',
         html: '...',
         styleHtmlContent: true,
@@ -24,7 +25,8 @@ Ext.define('app.view.TodoMainCard', {
             {xtype: 'todoeditcard'},
             {xtype: 'todolijstallecard'},
             {xtype: 'todolijstonderhandencard'},
-            {xtype: 'todolijstafgehandeldcard'}
+            {xtype: 'todolijstafgehandeldcard'},
+            {xtype: 'tododetailscard'}
         ]
     }
 });

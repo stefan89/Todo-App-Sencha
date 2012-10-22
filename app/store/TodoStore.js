@@ -13,8 +13,15 @@ Ext.define("app.store.TodoStore", {
             direction: "ASC",
             groupFn: function (record) {
                 if (record && record.data.datum) {
-                    return record.data.datum.toDateString();
-                } else {
+                    var datum = record.data.datum;
+                    var jaar = datum.getFullYear();
+                    var maand = datum.getMonth() + 1;
+                    var dag = datum.getDate();
+                    var datumNotatie = (dag + "-" + maand + "-" + jaar);
+
+                    return datumNotatie;
+                }
+                else {
                     return '';
                 }
             }
@@ -22,3 +29,4 @@ Ext.define("app.store.TodoStore", {
     }
 });
 
+//var x = record.data.datum;

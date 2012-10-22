@@ -77,7 +77,7 @@ Ext.define("app.view.TodoLijstOnderhanden", {
             {
                 xtype: "list",
                 store: "TodoStore",
-                itemId:"todoAlleLijst",
+                itemId:"todoOnderhandenLijst",
                 loadingText: "Todo's laden...",
                 emptyText: "<div class=\"todo-list-empty-text\">Geen todo's gevonden met deze status en type</div>",
                 onItemDisclosure: true,
@@ -91,9 +91,9 @@ Ext.define("app.view.TodoLijstOnderhanden", {
             fn: "onNieuwButtonTap"
         },
             {
-                delegate: "#todoAlleLijst",
+                delegate: "#todoOnderhandenLijst",
                 event: "disclose",
-                fn: "onPersoonLijstDisclose"
+                fn: "onTodoLijstDisclose"
             },
             {
                 //delegate: "#zoekVeld",
@@ -130,38 +130,34 @@ Ext.define("app.view.TodoLijstOnderhanden", {
         ]
     },
     onNieuwButtonTap: function () {
-        console.log("nieuwTodoCommand");
         this.fireEvent("nieuweTodoButtonCommand", this);
     },
-    onPersoonLijstDisclose: function (list, record, target, index, evt, options) {
-        //  console.log("detailsPersoonCommand");
-        //  this.fireEvent('detailsPersoonCommand', this, record);
+    onTodoLijstDisclose: function (list, record, target, index, evt, options) {
+          this.fireEvent('detailsTodoCommand', this, record);
     },
     onZoeken: function (field) {
         // console.log("typennnnn");
         //console.log(field.getValue());
         // this.fireEvent("zoekCommand", this, field);
     },
+
     onStopZoeken: function(){
         //   this.fireEvent("stopZoekCommand", this);
     },
+
     onTerugToTodoHome: function(){
-        console.log("onTerugToTodoHomeCommand");
         this.fireEvent("backToTodoHomeCommand", this);
     },
 
 
     //////FILTERS
     onAlleTodoButton: function(){
-        console.log("Alle!");
         this.fireEvent("alleTodoCommand", this);
     },
     onPriveTodoButton: function(){
-        console.log("Prive!");
         this.fireEvent("priveTodoCommand", this);
     },
     onZakelijkTodoButton: function(){
-        console.log("Zakelijk!");
         this.fireEvent("zakelijkTodoCommand", this);
     }
 

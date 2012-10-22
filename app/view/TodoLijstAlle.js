@@ -90,7 +90,7 @@ Ext.define("app.view.TodoLijstAlle", {
             {
                 delegate: "#todoAlleLijst",
                 event: "disclose",
-                fn: "onPersoonLijstDisclose"
+                fn: "onTodoLijstDisclose"
             },
             {
                 //delegate: "#zoekVeld",
@@ -127,12 +127,11 @@ Ext.define("app.view.TodoLijstAlle", {
         ]
     },
     onNieuwButtonTap: function () {
-        console.log("nieuwTodoCommand");
        this.fireEvent("nieuweTodoButtonCommand", this);
     },
-    onPersoonLijstDisclose: function (list, record, target, index, evt, options) {
+    onTodoLijstDisclose: function (list, record, target, index, evt, options) {
       //  console.log("detailsPersoonCommand");
-      //  this.fireEvent('detailsPersoonCommand', this, record);
+        this.fireEvent('detailsTodoCommand', this, record);
     },
     onZoeken: function (field) {
         // console.log("typennnnn");
@@ -143,7 +142,6 @@ Ext.define("app.view.TodoLijstAlle", {
      //   this.fireEvent("stopZoekCommand", this);
     },
     onTerugToTodoHome: function(){
-        console.log("onTerugToTodoHomeCommand");
         this.fireEvent("backToTodoHomeCommand", this);
     },
 
@@ -151,16 +149,12 @@ Ext.define("app.view.TodoLijstAlle", {
 
     //////FILTERS
     onAlleTodoButton: function(){
-        console.log("Alle!");
         this.fireEvent("alleTodoCommand", this);
     },
     onPriveTodoButton: function(){
-        console.log("Prive!");
         this.fireEvent("priveTodoCommand", this);
     },
     onZakelijkTodoButton: function(){
-        console.log("Zakelijk!");
         this.fireEvent("zakelijkTodoCommand", this);
     }
-
 });

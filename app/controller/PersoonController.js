@@ -181,7 +181,7 @@
         this.callParent(arguments);
         var dataStore = Ext.getStore("DataStore");
         dataStore.load();
-        console.log("launch");
+        console.log("launch Persoon controller");
     },
     init: function () {
         this.callParent(arguments);
