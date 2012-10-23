@@ -17,19 +17,19 @@
                 name:'todos'
         },
         validations: [
-            { type: 'presence', field: 'persoonId' },
-            { type: 'presence', field: 'email', message: 'Blablabla'  },
-            { type: 'presence', field: 'voorNaam', message: 'Voer een voornaam in voor deze persoon' },
-            { type: 'presence', field: 'achterNaam', message: 'Voer een achternaam in voor deze persoon' },
-            { type: 'presence', field: 'geslacht', message: 'Selecteer een geslacht voor deze persoon' },
-            { type: 'presence', field: 'geboorteDatum', message: 'Voer een geboortedatum in voor deze persoon' },
-            { type: 'presence', field: 'displayNaam' },
+            { type: 'presence', field: 'persoonId'},
+            { type: 'presence', field: 'email', message: 'E-mailadres is vereist.'  },
+            { type: 'presence', field: 'voorNaam', message: 'Voornaam is vereist.' },
+            { type: 'presence', field: 'achterNaam', message: 'Achternaam is vereist.' },
+            { type: 'presence', field: 'geslacht', message: 'Geslacht is vereist.' },
+            { type: 'presence', field: 'geboorteDatum', message: 'Geboortedatum is vereist.' },
+            { type: 'presence', field: 'displayNaam'},
 
-            { type: 'email', field: 'email', message: 'Voer een geldig e-mailadres in' },
-            { type: 'length', field: 'voorNaam', min: 2, max: 50, message: 'Voornaam is minimaal 2 en maximaal 5 tekens'},
-            { type: 'length', field: 'achterNaam', min: 2, max: 50, message: 'Achternaam is minimaal 2 en maximaal 5 tekens'},
-            { type: 'inclusion', list: ['Man', 'Vrouw'], field: 'geslacht', message: 'Voer een geldig geslacht in' },
-            { type: 'length', field: 'telefoonNummer', max: 20, message: 'Blablabla' }
+            { type: 'email', field: 'email', message: 'Vul een geldig e-mailadres in.' },
+            { type: 'length', field: 'voorNaam', min: 2, max: 50, message: 'Voornaam is minimaal 2 en maximaal 50 karakters lang.'},
+            { type: 'length', field: 'achterNaam', min: 2, max: 50, message: 'Achternaam is minimaal 2 en maximaal 50 karakters lang.'},
+            { type: 'inclusion', list: ['Man', 'Vrouw'], field: 'geslacht', message: 'Vul een geldig geslacht in.' },
+            { type: 'length', field: 'telefoonNummer', max: 20, message: 'Telefoonnummer is maximaal 20 karakters lang.' }
         ]
     }
 });

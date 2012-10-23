@@ -19,13 +19,18 @@ Ext.define("app.model.TodoModel", {
         },
         validations: [
             { type: 'presence', field: 'todoId'},
-            { type: 'presence', field: 'email', message: 'Blabla' },
-            { type: 'presence', field: 'korteOmschrijving', message: 'Blabla' },
-            { type: 'presence', field: 'datum', message: 'Blabla' },
-            { type: 'presence', field: 'urgentie', message: 'Blabla' },
-            { type: 'presence', field: 'plaatsOplevering', message: 'Blabla' },
-            { type: 'presence', field: 'status', message: 'Blabla' },
-            { type: 'presence', field: 'type', message: 'Blabla' }
+            { type: 'presence', field: 'email', message: 'Persoon is vereist.' },
+            { type: 'presence', field: 'korteOmschrijving', message: 'Korte omschrijving is vereist.' },
+            { type: 'presence', field: 'datum', message: 'Datum is vereist.' },
+            { type: 'presence', field: 'urgentie', message: 'Urgentie is vereist.' },
+            { type: 'presence', field: 'plaatsOplevering', message: 'Plaats oplevering is vereist.' },
+            { type: 'presence', field: 'status', message: 'Status is vereist.' },
+            { type: 'presence', field: 'type', message: 'Type is vereist.' },
+
+            { type: 'length', field: 'korteOmschrijving', min: 2, max: 100, message: 'Korte omschrijving is minimaal 2 en maximaal 100 karakters lang.'},
+            { type: 'length', field: 'langeOmschrijving', max: 2000, message: 'Lange omschrijving is maximaal 2000 karakters lang.'},
+            { type: 'inclusion', list: ['Onderhanden', 'Afgehandeld'], field: 'status', message: 'Vul een geldige status in.' },
+            { type: 'inclusion', list: ['Prive', 'Zakelijk'], field: 'type', message: 'Vul een geldig type in.' }
         ]
     }
 });

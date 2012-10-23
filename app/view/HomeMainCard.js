@@ -6,7 +6,6 @@ Ext.define('app.view.HomeMainCard', {
         'app.view.HomeReset',
         'app.view.HomeOver'
     ],
-
     config: {
         iconCls: 'home',
         title: 'Home',

@@ -24,7 +24,7 @@ Ext.define("app.view.TodoEditor", {
                 items: [
                     {
                         xtype: 'selectfield',
-                        label: 'Persoon voor wie de to-do is',
+                        label: 'Persoon voor wie de todo is',
                         labelAlign: 'top',
                         name: 'email',
                         store: 'PersoonStore',
@@ -96,7 +96,7 @@ Ext.define("app.view.TodoEditor", {
                     {
                         xtype: 'selectfield',
                         name: 'type',
-                        label: 'Prive of zakelijke to-do?',
+                        label: 'Prive of zakelijke todo?',
                         labelAlign: 'top',
                         required: true,
                         placeHolder: 'Selecteer het type',

@@ -12,7 +12,7 @@ Ext.define('app.view.TodoMainCard', {
 
     config: {
         iconCls: 'bookmarks',
-        title: 'Todo',
+        title: "Todo's",
         html: '...',
         styleHtmlContent: true,
         layout:{

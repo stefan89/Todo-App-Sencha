@@ -2,7 +2,6 @@ Ext.define('app.view.PersoonMainCard', {
     extend: 'Ext.Panel',
     xtype: 'persoonmaincard',
     requires: [
-        //'app.view.NotesList',
         'app.view.PersoonEditor',
         'app.view.PersoonLijst',
         'app.view.PersoonDetails'
@@ -10,7 +9,7 @@ Ext.define('app.view.PersoonMainCard', {
 
     config: {
         iconCls: 'user',
-        title: 'Persoon',
+        title: 'Personen',
         html: '...',
         styleHtmlContent: true,
         layout:{
@@ -22,10 +21,6 @@ Ext.define('app.view.PersoonMainCard', {
             {xtype: 'persoonlijstcard'},
             {xtype: 'persooneditcard'},
             {xtype: 'persoondetailscard'}
-
-
-            //{xtype: 'noteeditor'}
-           // {xtype: 'persoontoevoegcard'}
         ]
     }
 });

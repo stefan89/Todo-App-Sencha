@@ -319,7 +319,10 @@ Ext.define("app.controller.TodoController", {
         var errors = currentTodo.validate();
 
         if (!errors.isValid()) {
-            Ext.Msg.alert('Wacht!', 'foutje', Ext.emptyFn); //errors.getByField("email")[1].getMessage()
+            console.log('Aantal errors: ' + errors.length);
+            errors.each(function (item, index, length) {
+                Ext.Msg.alert('Mislukt!',item.getMessage(), Ext.emptyFn);
+            });
             currentTodo.reject();
             return;
         }
@@ -330,11 +333,11 @@ Ext.define("app.controller.TodoController", {
             todoStore.sync();
             todoStore.sort([{ property: 'korteOmschrijving', direction: 'ASC'}]);
 
-            Ext.Msg.alert('Gelukt!', 'Todo succesvol opgeslagen', function() {});
+            Ext.Msg.alert('Gelukt!', 'Todo succesvol opgeslagen.', function() {});
             this.onOnderhandenAlleTodosButtonCommand();
         }
         else if (null != persoonStore.findRecord('todoId', currentTodo.todoId)){
-            Ext.Msg.alert('Mistlukt!', 'TodoID bestaat al', Ext.emptyFn);
+            Ext.Msg.alert('Mistlukt!', 'TodoID bestaat al.', Ext.emptyFn);
         }
     },
 

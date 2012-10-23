@@ -9,7 +9,7 @@ Ext.define("app.view.TodoDetails", {
                 xtype: "toolbar",
                 ui: "light",
                 docked: "top",
-                title: "To-do details",
+                title: "Todo details",
                 items: [
                     {
                         xtype: "button",
@@ -35,7 +35,7 @@ Ext.define("app.view.TodoDetails", {
                 ]
             },
             {
-                html: '<p>Hieronder vind u detailinformatie van de geselecteerde To-do.</p>'
+                html: '<p>Hieronder vind u detailinformatie van de geselecteerde Todo.</p>'
                 //fontSize: '15px'
             },
             {
@@ -116,7 +116,7 @@ Ext.define("app.view.TodoDetails", {
             {
                 xtype: "button",
                 ui: "action",
-                text: "To-do afgehandeld"
+                text: "Todo afgehandeld"
             }
         ],
         listeners: [

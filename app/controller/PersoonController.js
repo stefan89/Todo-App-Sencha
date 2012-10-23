@@ -135,7 +135,11 @@
             var errors = currentPersoon.validate();
 
             if (!errors.isValid()) {
-                Ext.Msg.alert('Wacht!', errors.getByField("voorNaam")[0].getMessage(), Ext.emptyFn);
+                console.log('Aantal errors: ' + errors.length);
+                errors.each(function (item, index, length) {
+
+                    Ext.Msg.alert('Mislukt!',item.getMessage(), Ext.emptyFn);
+                });
                 currentPersoon.reject();
                 return;
             }
@@ -147,16 +151,16 @@
                     persoonStore.sync();
                     persoonStore.sort([{ property: 'achterNaam', direction: 'ASC'}]);
 
-                    Ext.Msg.alert('Gelukt!', 'Persoon succesvol opgeslagen', function() {});
+                    Ext.Msg.alert('Gelukt!', 'Persoon succesvol opgeslagen.', function() {});
                     this.activatePersoonLijstCard();
             }
 
             else if (null != persoonStore.findRecord('email', newValues.email)){
-                Ext.Msg.alert('Mistlukt!', 'E-mailadres al in gebruik', Ext.emptyFn);
+                Ext.Msg.alert('Mistlukt!', 'E-mailadres al in gebruik.', Ext.emptyFn);
             }
         }
         else{
-            Ext.Msg.alert('Mistlukt!', 'Geen geldig telefoonnummer ingevoerd', Ext.emptyFn);
+            Ext.Msg.alert('Mistlukt!', 'Vul een geldig telefoonnummer in. Let op: dit veld is niet vereist.', Ext.emptyFn);
         }
     },
 

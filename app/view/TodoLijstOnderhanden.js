@@ -23,7 +23,6 @@ Ext.define("app.view.TodoLijstOnderhanden", {
                 {
                     xtype: "button",
                     text: 'Nieuw',
-                    ui: 'action',
                     itemId: "nieuwTodoButton"
                 }
             ]
@@ -32,8 +31,10 @@ Ext.define("app.view.TodoLijstOnderhanden", {
                 xtype: 'toolbar',
                 ui: 'light',
                 docked: 'top',
-                //align: 'center',
                 items: [
+                    {
+                        xtype: 'spacer'
+                    },
                     {
                         xtype: 'segmentedbutton',
                         allowDepress: false,
@@ -53,6 +54,9 @@ Ext.define("app.view.TodoLijstOnderhanden", {
                                 itemId: "zakelijkTodoButton"
                             }
                         ]
+                    },
+                    {
+                        xtype: 'spacer'
                     }
 
                 ]
@@ -66,7 +70,7 @@ Ext.define("app.view.TodoLijstOnderhanden", {
             items: [
                 {
                     xtype: 'searchfield',
-                    placeHolder: "Zoek to-do's...",
+                    placeHolder: "Zoek todo's...",
                     name: 'searchfieldOnderhanden'
                     //: 'zoekVeld'
                 }
