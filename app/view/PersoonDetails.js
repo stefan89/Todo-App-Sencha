@@ -26,11 +26,13 @@ Ext.define("app.view.PersoonDetails", {
             },
             {
                 xtype: "fieldset",
+
                 items: [
                     {
                         xtype: 'textfield',
                         name: 'voorNaam',
                         label: 'Voornaam',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -39,6 +41,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'achterNaam',
                         label: 'Achternaam',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -47,6 +50,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'geslacht',
                         label: 'Geslacht',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -55,6 +59,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'datepickerfield',
                         name: 'geboorteDatum',
                         label: 'Geboortedatum',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         dateFormat:'d-m-Y',
                         readOnly:true,
@@ -64,6 +69,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'email',
                         label: 'Email',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -72,6 +78,7 @@ Ext.define("app.view.PersoonDetails", {
                         xtype: 'textfield',
                         name: 'telefoonNummer',
                         label: 'Telefoonnummer',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true

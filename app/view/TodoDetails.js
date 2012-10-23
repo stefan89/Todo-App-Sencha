@@ -45,6 +45,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'textfield',
                         name: 'email',
                         label: 'E-mail persoon',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -53,6 +54,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'textfield',
                         name: 'korteOmschrijving',
                         label: 'Korte omschrijving',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -61,6 +63,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'textfield',
                         name: 'langeOmschrijving',
                         label: 'Lange omschrijving',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -69,6 +72,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'datepickerfield',
                         name: 'datum',
                         label: 'Datum',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         dateFormat:'d-m-Y',
                         readOnly:true,
@@ -78,6 +82,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'textfield',
                         name: 'urgentie',
                         label: 'Urgentie',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -86,6 +91,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'textfield',
                         name: 'plaatsOplevering',
                         label: 'Plaats',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -94,6 +100,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'textfield',
                         name: 'type',
                         label: 'Type',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -102,6 +109,7 @@ Ext.define("app.view.TodoDetails", {
                         xtype: 'textfield',
                         name: 'status',
                         label: 'Status',
+                        style: 'background-color: #FFF7D5',
                         labelAlign: 'top',
                         readOnly:true,
                         clearIcon: true
@@ -116,7 +124,8 @@ Ext.define("app.view.TodoDetails", {
             {
                 xtype: "button",
                 ui: "action",
-                text: "Todo afgehandeld"
+                text: "Todo afgehandeld",
+                itemId: "afhandelButton"
             }
         ],
         listeners: [
@@ -124,13 +133,21 @@ Ext.define("app.view.TodoDetails", {
                 delegate: "#backButton",
                 event: "tap",
                 fn: "onBackButtonTap"
+            },
+            {
+                delegate: "#verwijderButton",
+                event: "tap",
+                fn: "onVerwijderButtonTap"
             }
         ]
     },
 
     onBackButtonTap: function () {
-        console.log("backToTodoHomeCommand");
         this.fireEvent("backToTodoHomeCommand", this);
+    },
+
+    onVerwijderButtonTap: function () {
+        this.fireEvent("verwijderTodoCommand", this);
     }
 });
 
@@ -167,5 +184,5 @@ Ext.define("app.view.TodoDetails", {
  },
  onVerwijderButtonTap: function () {
  console.log("verwijderPersoonCommand");
- // this.fireEvent("verwijderPersoonCommand", this);
+ // this.fireEvent("verwijderTodoCommand", this);
  },*/

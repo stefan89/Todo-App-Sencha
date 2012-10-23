@@ -33,26 +33,3 @@
         ]
     }
 });
-
-
-
-
-
-//^[0-9]*$
-//[0-9]{0,20}
-//{ name: 'id', type: 'int' },
-//{ name: 'dateCreated', type: 'date', dateFormat: 'c' },
-//{ type: 'presence', field: 'id' },
-//{ type: 'presence', field: 'dateCreated' },
-//{ type: 'length', field: 'telefoonNummer',ming: 0, max: 20, message: 'Telefoonnummer is te lang'}
-
-/*
- {
- model: 'app.model.TodoModel' ,
- // model: 'MyApp.model.Task',
- autoLoad: true,
- foreignKey: 'email',
- name: 'todos',
- store: {storeId: 'xtodo-app-todostore'}
- }
-    */

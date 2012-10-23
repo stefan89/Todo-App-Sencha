@@ -16,12 +16,3 @@
         }
     }
 });
-
-
-//groupFn: function (record) {
-//if (record && record.data.dateCreated) {
-//    return record.data.dateCreated.toDateString();
-//} else {
-//    return '';
-//}
-//}

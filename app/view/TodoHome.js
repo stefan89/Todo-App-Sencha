@@ -8,6 +8,7 @@ Ext.define('app.view.TodoHome', {
 
         layout:'card',
         id:'TodoHome',
+        scrollable: 'vertical',
         items: [
             {
                 docked: 'top',
@@ -30,19 +31,28 @@ Ext.define('app.view.TodoHome', {
                 styleHtmlContent: true,
                 items: [
                     {
+                        html: " "
+                    },
+                    {
                         xtype: "button",
+                        height: '50px',
+                        margin: '15 15 10 15',
                         ui: "knoplijst",
                         text:    "Onderhanden todo's",
                         itemId: "onderhandenTodoButton"
                     },
                     {
                         xtype: "button",
+                        height: '50px',
+                        margin: '15 15 0 15',
                         ui: "knoplijst",
                         text:    "Afgehandelde todo's",
                         itemId: "afgehandeldTodoButton"
                     },
                     {
                         xtype: "button",
+                        height: '50px',
+                        margin: '15 15 0 15',
                         ui: "knoplijst",
                         text:    "Alle todo's",
                         itemId: "alleTodoButton"

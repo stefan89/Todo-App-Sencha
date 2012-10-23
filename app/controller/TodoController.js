@@ -7,7 +7,12 @@ Ext.define("app.controller.TodoController", {
             todoLijstAlleCard: "todolijstallecard",
             todoLijstOnderhandenCard: "todolijstonderhandencard",
             todoLijstAfgehandeldCard: "todolijstafgehandeldcard",
-            todoDetailsCard: "tododetailscard"
+            todoDetailsCard: "tododetailscard",
+
+            todoDetailsCardVerwijderButton:  '#verwijderButton',
+            todoDetailsCardWijzigButton: '#wijzigButton',
+            todoDetailsCardAfhandelButton: '#afhandelButton'
+
         },
 
         control: {
@@ -53,7 +58,8 @@ Ext.define("app.controller.TodoController", {
                 detailsTodoCommand: "onDetailsTodoCommand"
             },
             todoDetailsCard: {
-                backToTodoHomeCommand: "onBackToTodoOnderhandenCommand"
+                backToTodoHomeCommand: "onBackToTodoOnderhandenCommand",
+                verwijderTodoCommand: "onVerwijderTodoCommand"
             }
         }
     },
@@ -352,6 +358,24 @@ Ext.define("app.controller.TodoController", {
         this.onBackToTodoHomeCommand();
     },
 
+    onVerwijderTodoCommand: function () {
+        var todoDetailsCard = this.getTodoDetailsCard();
+        var currentTodo = todoDetailsCard.getRecord();
+        var todoStore = Ext.getStore("TodoStore");
+
+        Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
+            if (msg == "yes"){
+
+                todoStore.remove(currentTodo);
+                todoStore.sync();
+            }
+            else{
+                console.log("Todo niet verwijderd");
+            }
+        });
+        this.onAlleAlleTodosButtonCommand();
+    },
+
 
 
 
@@ -370,7 +394,21 @@ Ext.define("app.controller.TodoController", {
 
     activateTodoDetailsCard: function (record) {
         var todoDetailsCard = this.getTodoDetailsCard();
+        var verwijderButton = this.getTodoDetailsCardVerwijderButton();
+        var wijzigButton = this.getTodoDetailsCardWijzigButton()
+        var afhandelButton = this.getTodoDetailsCardAfhandelButton()
         todoDetailsCard.setRecord(record); // load() is deprecated.
+
+        if(record.get("status") === "Afgehandeld"){ //knoppen verbergen
+            verwijderButton.hide();
+            wijzigButton.hide();
+            afhandelButton.hide();
+        }
+        else { //knoppen weergeven
+            verwijderButton.show();
+            wijzigButton.show();
+            afhandelButton.show();
+        }
         Ext.getCmp('todomain_card').animateActiveItem(5,{type: 'slide', direction: 'left'});
     },
 

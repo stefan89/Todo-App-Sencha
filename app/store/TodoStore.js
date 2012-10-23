@@ -9,7 +9,7 @@ Ext.define("app.store.TodoStore", {
         },
         sorters: [{ property: 'korteOmschrijving', direction: 'ASC'}],
         grouper: {
-            sortProperty: "korteOmschrijving",
+            sortProperty: "datum",
             direction: "ASC",
             groupFn: function (record) {
                 if (record && record.data.datum) {
@@ -28,5 +28,3 @@ Ext.define("app.store.TodoStore", {
         }
     }
 });
-
-//var x = record.data.datum;

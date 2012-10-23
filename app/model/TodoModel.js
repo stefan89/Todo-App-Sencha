@@ -34,16 +34,3 @@ Ext.define("app.model.TodoModel", {
         ]
     }
 });
-
-
-
-
-
-
-
-
-// type: 'email', field: 'email', message: 'Voer een geldig e-mailadres in' }
-
-//primaryKey: 'todoId',
-//model: 'app.model.PersoonModel',
-   // associationKey: 'email'
