@@ -69,16 +69,12 @@
         ]
     },
     onNieuwButtonTap: function () {
-        console.log("nieuwPersoonCommand");
         this.fireEvent("nieuwPersoonCommand", this);
     },
     onPersoonLijstDisclose: function (list, record, target, index, evt, options) {
-        console.log("detailsPersoonCommand");
         this.fireEvent('detailsPersoonCommand', this, record);
     },
     onZoeken: function (field) {
-       // console.log("typennnnn");
-        //console.log(field.getValue());
         this.fireEvent("zoekCommand", this, field);
     },
     onStopZoeken: function(){

@@ -27,8 +27,7 @@ Ext.define('app.view.HomeOver', {
             },
             {
                 html :  '<h3><b>Wat is dit?</h3></b>' +
-                        'Een todo lijst app ontwikkeld met jQuery Mobile, jQuery en HTML5 Web SQL ' +
-                        'Database.'
+                        'Een todo lijst app ontwikkeld met Sencha Touch 2.0.1.'
             },
             {
                 html :  '<h3><b>Waarom?</h3></b>' +

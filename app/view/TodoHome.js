@@ -5,7 +5,6 @@ Ext.define('app.view.TodoHome', {
     config: {
         iconCls: 'star',
         title: 'Todo',
-
         layout:'card',
         id:'TodoHome',
         scrollable: 'vertical',
@@ -67,11 +66,6 @@ Ext.define('app.view.TodoHome', {
                 fn: "onNieuweTodoButtonTap"
             },
             {
-             //   delegate: "#nieuweTodoButton",
-             //   event: "tap",
-             //   fn: "onNieuweTodoButtonTap"
-            },
-            {
                 delegate: "#alleTodoButton",
                 event: "tap",
                 fn: "onAlleTodosButtonTap"
@@ -86,25 +80,18 @@ Ext.define('app.view.TodoHome', {
                 event: "tap",
                 fn: "onAfgehandeldTodosButtonTap"
             }
-
         ]
     },
-
     onNieuweTodoButtonTap: function () {
-        console.log("nieuweTodoButtonCommand");
         this.fireEvent("nieuweTodoButtonCommand", this);
     },
     onAlleTodosButtonTap: function(){
-        console.log("alleTodosButtonCommand");
         this.fireEvent("alleTodosButtonCommand", this);
     },
     onOnderhandenTodosButtonTap: function(){
-        console.log("onderhandenTodosButtonCommand");
         this.fireEvent("onderhandenTodosButtonCommand", this);
     },
     onAfgehandeldTodosButtonTap: function(){
-        console.log("afgehandeldTodosButtonCommand");
         this.fireEvent("afgehandeldTodosButtonCommand", this);
     }
-
 });

@@ -2,6 +2,7 @@ Ext.define("app.view.TodoEditor", {
     extend: "Ext.form.Panel",
     requires: 'Ext.form.FieldSet',
     alias: "widget.todoeditcard",
+
     config: {
         scrollable: 'vertical',
         items: [
@@ -9,7 +10,7 @@ Ext.define("app.view.TodoEditor", {
                 xtype: "toolbar",
                 ui: "light",
                 docked: "top",
-                title: "Nieuwe todo",
+                title: "Todo editor",
                 items: [
                     {
                         xtype: "button",
@@ -64,7 +65,6 @@ Ext.define("app.view.TodoEditor", {
 
                             var selecteddatum = this.getValue();
                             if (selecteddatum < minimumdatum){
-                                console.log("Datum afgekeurd");
                                 Ext.Msg.alert('Oops!', 'Datum afgekeurd', Ext.emptyFn);
                                 picker.reset();
                             }
@@ -78,7 +78,6 @@ Ext.define("app.view.TodoEditor", {
                     {
                         xtype: 'sliderfieldextended',
                         name: 'urgentie',
-                        //labelText: 'Integer',
                         label: 'Urgentie',
                         labelAlign: 'top',
                         value: 1,
@@ -116,7 +115,7 @@ Ext.define("app.view.TodoEditor", {
             {
                 xtype: "button",
                 ui: "action",
-                text: "Todo toevoegen",
+                text: "Todo opslaan",
                 itemId: "todoOpslaanButton"
             }
         ],
@@ -134,12 +133,9 @@ Ext.define("app.view.TodoEditor", {
         ]
     },
     onTodoOpslaanButtonTap: function () {
-        console.log("opslaanTodoCommand");
         this.fireEvent("opslaanTodoCommand", this);
     },
-
     onBackToTodoHomeButtonTap: function () {
-        console.log("backToTodoHomeCommand");
         this.fireEvent("backToTodoHomeCommand", this);
     }
 });

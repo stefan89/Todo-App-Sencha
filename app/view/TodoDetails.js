@@ -2,6 +2,7 @@ Ext.define("app.view.TodoDetails", {
     extend: "Ext.form.Panel",
     requires: "Ext.form.FieldSet",
     alias: "widget.tododetailscard",
+
     config: {
         scrollable: 'vertical',
         items: [
@@ -36,7 +37,6 @@ Ext.define("app.view.TodoDetails", {
             },
             {
                 html: '<p>Hieronder vind u detailinformatie van de geselecteerde Todo.</p>'
-                //fontSize: '15px'
             },
             {
                 xtype: "fieldset",
@@ -118,11 +118,16 @@ Ext.define("app.view.TodoDetails", {
             },
             {
                 xtype: "button",
+                height: '35px',
+                margin: '15 15 0 15',
                 ui: "action",
-                text: "Open plaats van oplevering"
+                text: "Open plaats van oplevering",
+                itemId: "mapsButton"
             },
             {
                 xtype: "button",
+                height: '35px',
+                margin: '15 15 0 15',
                 ui: "action",
                 text: "Todo afgehandeld",
                 itemId: "afhandelButton"
@@ -138,51 +143,37 @@ Ext.define("app.view.TodoDetails", {
                 delegate: "#verwijderButton",
                 event: "tap",
                 fn: "onVerwijderButtonTap"
+            },
+            {
+                delegate: "#mapsButton",
+                event: "tap",
+                fn: "onMapsButtonTap"
+            },
+            {
+                delegate: "#wijzigButton",
+                event: "tap",
+                fn: "onWijzigButtonTap"
+            },
+            {
+                delegate: "#afhandelButton",
+                event: "tap",
+                fn: "onAfhandelButtonTap"
             }
         ]
     },
-
     onBackButtonTap: function () {
         this.fireEvent("backToTodoHomeCommand", this);
     },
-
     onVerwijderButtonTap: function () {
         this.fireEvent("verwijderTodoCommand", this);
+    },
+    onMapsButtonTap: function () {
+        this.fireEvent("mapsTodoCommand", this);
+    },
+    onWijzigButtonTap: function(){
+        this.fireEvent("wijzigTodoCommand", this);
+    },
+    onAfhandelButtonTap: function(){
+        this.fireEvent("afhandelTodoCommand", this);
     }
 });
-
-
-//{
-//    xtype: "button",
-//    iconCls: "trash",
-//   iconMask: true,
-//    itemId: "verwijderButton"
-//}//,
-//{
-// xtype: "button",
-// ui: "action",
-//  text: "Opslaan",
-// itemId: "opslaanButton"
-//}
-
-
-//{
-// delegate: "#opslaanButton",
-//event: "tap"//,
-//  fn: "onOpslaanButtonTap"
-//},
-//{
-//  delegate: "#verwijderButton",
-//  event: "tap"//,
-//   fn: "onVerwijderButtonTap"
-//}
-
-/*
- onOpslaanButtonTap: function () {
- console.log("opslaanPersoonCommand");
- // this.fireEvent("opslaanPersoonCommand", this);
- },
- onVerwijderButtonTap: function () {
- console.log("verwijderPersoonCommand");
- // this.fireEvent("verwijderTodoCommand", this);
- },*/

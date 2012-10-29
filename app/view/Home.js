@@ -30,7 +30,6 @@ Ext.define('app.view.Home', {
                     action: 'ButtonHomeResetClicked'
                 }
             ]
-        }
-        ]
+        }]
     }
 });

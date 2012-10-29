@@ -5,7 +5,6 @@ Ext.define('app.view.HomeReset', {
     config: {
         iconCls: 'home',
         title: 'Home',
-        //style: 'background-color: lightblue',
         id:'homereset',
         styleHtmlContent: true,
         items: [{
@@ -19,8 +18,7 @@ Ext.define('app.view.HomeReset', {
                     ui: "back",
                     text: "Terug",
                     action: 'ButtonBackToHomeClicked'
-                }
-            ]
+                }]
             },
             {
                 html:   '<p>Hier kunt u de app resetten naar de default instellingen.' +

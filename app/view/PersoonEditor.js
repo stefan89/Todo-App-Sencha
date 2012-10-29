@@ -71,7 +71,6 @@
                                 var minimumdatum = new Date(datumVandaag.getFullYear()-18, datumVandaag.getMonth(), datumVandaag.getDate());
                                 var selecteddatum = this.getValue();
                                 if (selecteddatum > minimumdatum){
-                                    console.log("Jonger dan 18");
                                     Ext.Msg.alert('Oops!', 'Minimum leeftijd is 18 jaar', Ext.emptyFn);
                                     picker.reset();
                                 }
@@ -95,23 +94,7 @@
                         label: 'Telefoonnummer',
                         labelAlign: 'top',
                         required: false,
-                        placeHolder: 'Vul hier het telefoonnummer in..',
-                        listeners:{
-                            change:function(field){
-                                var x = this.getValue();
-                               // console.log(textfield);
-                                console.log(x);
-                                //(Number(d))
-                                //if (Ext.isNumeric(x)){
-                                //    console.log("AAABCD");
-                                //}
-                               // else{
-                                //    console.log("Geen number");
-                                //    Ext.Msg.alert('Oops!', 'Minimum leeftijd is 18 jaar', Ext.emptyFn);
-                                //    field.reset();
-                               // }
-                            }
-                        }
+                        placeHolder: 'Vul hier het telefoonnummer in..'
                     }
                 ]
             },
@@ -136,31 +119,10 @@
         ]
     },
     onOpslaanButtonTap: function () {
-        console.log("opslaanPersoonCommand");
         this.fireEvent("opslaanPersoonCommand", this);
     },
 
     onBackButtonTap: function () {
-        console.log("backToHomeCommand");
         this.fireEvent("backToPersoonHomeCommand", this);
     }
 });
-
-
-//{
-//    xtype: "button",
-//        iconCls: "trash",
-//    iconMask: true,
-//    itemId: "verwijderButton"
-//},
-
-//{
-//    delegate: "#verwijderButton",
-//        event: "tap",
-//    fn: "onVerwijderButtonTap"
-//}
-
-//onVerwijderButtonTap: function () {
-//    console.log("verwijderPersoonCommand");
-//    this.fireEvent("verwijderPersoonCommand", this);
-//},

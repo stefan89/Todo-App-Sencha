@@ -1,7 +1,6 @@
 Ext.define('app.view.Main', {
     extend:'Ext.TabPanel',
     xtype: 'maincard',
-
     requires: [
         'app.view.HomeMainCard',
         'app.view.PersoonMainCard',

@@ -37,8 +37,8 @@ Ext.define("app.view.TodoLijstAlle", {
                     },
                     {
                         xtype: 'segmentedbutton',
+                        itemId: 'segmentedButtonAlle',
                         allowDepress: false,
-
                         items: [
                             {
                                 text: 'Alle',
@@ -68,12 +68,10 @@ Ext.define("app.view.TodoLijstAlle", {
                 items: [
                     {
                         xtype: 'searchfield',
+                        itemId: 'searchfieldAlle',
                         placeHolder: "Zoek todo's...",
                         name: 'searchfieldAlle'
-                        //: 'zoekVeld'
                     }
-
-
                 ]
             },
             {
@@ -85,9 +83,10 @@ Ext.define("app.view.TodoLijstAlle", {
                 onItemDisclosure: true,
                 grouped: true,
                 itemTpl:    "<div class=\"list-item-title\"><b>{korteOmschrijving}</b></div>" +
-                            "<div class=\"list-item-narrative\">E-mail persoon: <b>{email}</b> - urgentie: <b>{urgentie}</b></div>"
+                            "<div class=\"list-item-narrative\">E-mail persoon: <b>{email}</b> - status: <b>{status}</b> - urgentie: <b>{urgentie}</b></div>"
             }],
-        listeners: [{
+        listeners: [
+            {
                 delegate: "#nieuwTodoButton",
                 event: "tap",
                 fn: "onNieuwButtonTap"
@@ -98,14 +97,14 @@ Ext.define("app.view.TodoLijstAlle", {
                 fn: "onTodoLijstDisclose"
             },
             {
-                //delegate: "#zoekVeld",
-                //event: "keyup",
-                //fn: "onZoeken"
+                delegate: "#searchfieldAlle",
+                event: "keyup",
+                fn: "onZoeken"
             },
             {
-                //delegate: "#zoekVeld",
-                //event: "clearicontap",
-                //fn: "onStopZoeken"
+                delegate: "#searchfieldAlle",
+                event: "clearicontap",
+                fn: "onStopZoeken"
             },
             {
                 delegate: "#terugButton",
@@ -128,30 +127,23 @@ Ext.define("app.view.TodoLijstAlle", {
                 event: "tap",
                 fn: "onZakelijkTodoButton"
             }
-
         ]
     },
     onNieuwButtonTap: function () {
        this.fireEvent("nieuweTodoButtonCommand", this);
     },
     onTodoLijstDisclose: function (list, record, target, index, evt, options) {
-      //  console.log("detailsPersoonCommand");
         this.fireEvent('detailsTodoCommand', this, record);
     },
     onZoeken: function (field) {
-        // console.log("typennnnn");
-        //console.log(field.getValue());
-       // this.fireEvent("zoekCommand", this, field);
+       this.fireEvent("zoekCommand", this, field);
     },
     onStopZoeken: function(){
-     //   this.fireEvent("stopZoekCommand", this);
+       this.fireEvent("stopZoekCommand", this);
     },
     onTerugToTodoHome: function(){
         this.fireEvent("backToTodoHomeCommand", this);
     },
-
-
-
     //////FILTERS
     onAlleTodoButton: function(){
         this.fireEvent("alleTodoCommand", this);

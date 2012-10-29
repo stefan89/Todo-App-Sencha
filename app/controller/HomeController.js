@@ -31,15 +31,12 @@ Ext.define("app.controller.HomeController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     changeScreenToOverPage: function () {
-        console.log("Op home over knop gedrukt - verander scherm naar over pagina");
         Ext.getCmp('homemain_card').animateActiveItem(1,{type: 'slide', direction: 'left'});
     },
 
     changeScreenToResetPage: function () {
-        console.log("Op home reset knop gedrukt - verander scherm naar reset pagina");
         Ext.getCmp('homemain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
     },
-
 
 
 
@@ -51,19 +48,17 @@ Ext.define("app.controller.HomeController", {
 
         Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
             if (msg == "yes"){
-                console.log("Data reset");
                 var persoonStore = Ext.getStore("PersoonStore");
                 persoonStore.removeAll();
                 persoonStore.sync();
+                Ext.getCmp('homemain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
+                Ext.Msg.alert('Informatie', 'Data succesvol reset.');
             }
             else{
-                console.log("Data niet reset");
+                Ext.Msg.alert('Informatie', 'Data niet reset.');
             }
         });
     },
-
-
-
 
 
 
@@ -72,16 +67,12 @@ Ext.define("app.controller.HomeController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     changeScreenToHomePage: function () {
-        console.log("Op back knop gedrukt - verander scherm naar Home hoofd");
         Ext.getCmp('homemain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
     },
 
 
 
-
-
-
-// Base Class functions.
+    // Base Class functions.
     launch: function () {
         this.callParent(arguments);
         console.log("launch Home controller");

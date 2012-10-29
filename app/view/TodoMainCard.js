@@ -7,7 +7,8 @@ Ext.define('app.view.TodoMainCard', {
         'app.view.TodoLijstAlle',
         'app.view.TodoLijstOnderhanden',
         'app.view.TodoLijstAfgehandeld',
-        'app.view.TodoDetails'
+        'app.view.TodoDetails',
+        'app.view.TodoMaps'
     ],
 
     config: {
@@ -26,7 +27,8 @@ Ext.define('app.view.TodoMainCard', {
             {xtype: 'todolijstallecard'},
             {xtype: 'todolijstonderhandencard'},
             {xtype: 'todolijstafgehandeldcard'},
-            {xtype: 'tododetailscard'}
+            {xtype: 'tododetailscard'},
+            {xtype: 'todomapscard'}
         ]
     }
 });

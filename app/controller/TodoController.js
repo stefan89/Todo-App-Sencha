@@ -8,13 +8,14 @@ Ext.define("app.controller.TodoController", {
             todoLijstOnderhandenCard: "todolijstonderhandencard",
             todoLijstAfgehandeldCard: "todolijstafgehandeldcard",
             todoDetailsCard: "tododetailscard",
-
+            todoMapsCard: "todomapscard",
+            todoGoogleMapsCard: "googlemapscard",
             todoDetailsCardVerwijderButton:  '#verwijderButton',
             todoDetailsCardWijzigButton: '#wijzigButton',
-            todoDetailsCardAfhandelButton: '#afhandelButton'
-
+            todoDetailsCardAfhandelButton: '#afhandelButton',
+            todoSearchfieldOnderhanden: '#searchfieldOnderhanden',
+            todoPlaatsOplevering: '#plaatsOplevering'
         },
-
         control: {
             todoHomeCard: {
                 nieuweTodoButtonCommand: "onNieuweTodoButtonCommand",
@@ -29,37 +30,27 @@ Ext.define("app.controller.TodoController", {
             todoLijstAlleCard:{
                 backToTodoHomeCommand: "onBackToTodoHomeCommand",
                 nieuweTodoButtonCommand: "onNieuweTodoButtonCommand",
-                //zoekCommand: "onZoekCommand"//,
-                //stopZoekCommand: "onStopZoekCommand"
-                alleTodoCommand: "onAlleAlleTodosButtonCommand",
-                priveTodoCommand: "onAllePriveTodoCommand",
-                zakelijkTodoCommand: "onAlleZakelijkTodoCommand",
                 detailsTodoCommand: "onDetailsTodoCommand"
-
             },
             todoLijstOnderhandenCard:{
                 backToTodoHomeCommand: "onBackToTodoHomeCommand",
                 nieuweTodoButtonCommand: "onNieuweTodoButtonCommand",
-                //zoekCommand: "onZoekCommand",
-                //stopZoekCommand: "onStopZoekCommand"
-                alleTodoCommand: "onOnderhandenAlleTodosButtonCommand",
-                priveTodoCommand: "onOnderhandenPriveTodoCommand",
-                zakelijkTodoCommand: "onOnderhandenZakelijkTodoCommand",
                 detailsTodoCommand: "onDetailsTodoCommand"
             },
             todoLijstAfgehandeldCard:{
                 backToTodoHomeCommand: "onBackToTodoHomeCommand",
                 nieuweTodoButtonCommand: "onNieuweTodoButtonCommand",
-                //zoekCommand: "onZoekCommand",
-                //stopZoekCommand: "onStopZoekCommand"
-                alleTodoCommand: "onAfgehandeldAlleTodosButtonCommand",
-                priveTodoCommand: "onAfgehandeldPriveTodoCommand",
-                zakelijkTodoCommand: "onAfgehandeldZakelijkTodoCommand",
                 detailsTodoCommand: "onDetailsTodoCommand"
             },
             todoDetailsCard: {
-                backToTodoHomeCommand: "onBackToTodoOnderhandenCommand",
-                verwijderTodoCommand: "onVerwijderTodoCommand"
+                backToTodoHomeCommand: "onBackToTodoLijstCommand",
+                verwijderTodoCommand: "onVerwijderTodoCommand",
+                mapsTodoCommand: "onMapsTodoCommand",
+                wijzigTodoCommand: "onWijzigTodoCommand",
+                afhandelTodoCommand: "onAfhandelTodoCommand"
+            },
+            todoMapsCard: {
+                backToTodoHomeCommand: "onBackToTodoDetailsCommand"
             }
         }
     },
@@ -114,8 +105,6 @@ Ext.define("app.controller.TodoController", {
 
 
 
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //todoLijstAlle handlers/functions                                                                             //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,49 +115,22 @@ Ext.define("app.controller.TodoController", {
         Ext.getCmp('todomain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
     },
 
-    onAllePriveTodoCommand: function() {
-        var queryType = "Prive";
-        var store = Ext.getStore('TodoStore');
-        store.clearFilter();
-
-        if(queryType){
-            var thisRegExType = new RegExp(queryType, "i");
-            store.filterBy(function(record) {
-                if (thisRegExType.test(record.get('type'))
-                    ) {
-                    return true;
-                };
-                return false;
-            });
-        }
-    },
-
-    onAlleZakelijkTodoCommand: function() {
-        var queryType = "Zakelijk";
-        var store = Ext.getStore('TodoStore');
-        store.clearFilter();
-
-        if(queryType){
-            var thisRegExType = new RegExp(queryType, "i");
-            store.filterBy(function(record) {
-                if (thisRegExType.test(record.get('type'))
-                    ) {
-                    return true;
-                };
-                return false;
-            });
-        }
-    },
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //todoLijstOnderhanden handlers/functions                                                                             //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    onOnderhandenAlleTodosButtonCommand: function(){
+    onOnderhandenAlleTodosButtonCommand: function(direction){
+        var slideDirection = 'left';
+        if (direction === "right"){
+            slideDirection = "right";
+        }
+        var searchfield = this.getTodoSearchfieldOnderhanden();
+        searchfield.reset();
+        var queryStatus = "Onderhanden";
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
-        var queryStatus = "Onderhanden";
 
         if(queryStatus){
             var thisRegExStatus = new RegExp(queryStatus, "i");
@@ -179,67 +141,19 @@ Ext.define("app.controller.TodoController", {
                 return false;
             });
         }
-        Ext.getCmp('todomain_card').animateActiveItem(3,{type: 'slide', direction: 'left'});
+        Ext.getCmp('todomain_card').animateActiveItem(3,{type: 'slide', direction: slideDirection});
     },
-
-    onOnderhandenPriveTodoCommand: function() {
-        var queryStatus = "Onderhanden";
-        var queryType = "Prive";
-        var store = Ext.getStore('TodoStore');
-        store.clearFilter();
-
-        if(queryType){
-            var thisRegExType = new RegExp(queryType, "i");
-            var thisRegExStatus = new RegExp(queryStatus, "i");
-            store.filterBy(function(record) {
-                if (thisRegExType.test(record.get('type'))
-                    &&
-                    thisRegExStatus.test(record.get('status'))
-                ) {
-                    return true;
-                };
-                return false;
-            });
-        }
-    },
-
-    onOnderhandenZakelijkTodoCommand: function() {
-        var queryStatus = "Onderhanden";
-        var queryType = "Zakelijk";
-        var store = Ext.getStore('TodoStore');
-        store.clearFilter();
-
-        if(queryType){
-            var thisRegExType = new RegExp(queryType, "i");
-            var thisRegExStatus = new RegExp(queryStatus, "i");
-            store.filterBy(function(record) {
-                if (thisRegExType.test(record.get('type'))
-                    &&
-                    thisRegExStatus.test(record.get('status'))
-                    ) {
-                    return true;
-                };
-                return false;
-            });
-        }
-    },
-
-
-
-
-    //onStopZoekCommand: function() {
-    //    var store = Ext.getStore('TodoStore');
-    //    store.clearFilter();
-    //},
-
-
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //todoLijstAfgehandeld handlers/functions                                                                             //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    onAfgehandeldAlleTodosButtonCommand: function(){
+    onAfgehandeldAlleTodosButtonCommand: function(direction){
+        var slideDirection = 'left';
+        if (direction === "right"){
+            slideDirection = "right";
+        }
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
         var queryString = "Afgehandeld";
@@ -253,55 +167,8 @@ Ext.define("app.controller.TodoController", {
                 return false;
             });
         }
-        Ext.getCmp('todomain_card').animateActiveItem(4,{type: 'slide', direction: 'left'});
+        Ext.getCmp('todomain_card').animateActiveItem(4,{type: 'slide', direction: slideDirection});
     },
-
-    onAfgehandeldPriveTodoCommand: function() {
-        var queryStatus = "Afgehandeld";
-        var queryType = "Prive";
-
-        var store = Ext.getStore('TodoStore');
-        store.clearFilter();
-
-        if(queryType){
-            var thisRegExType = new RegExp(queryType, "i");
-            var thisRegExStatus = new RegExp(queryStatus, "i");
-            store.filterBy(function(record) {
-                if (thisRegExType.test(record.get('type'))
-                    &&
-                    thisRegExStatus.test(record.get('status'))
-                    ) {
-                    return true;
-                };
-                return false;
-            });
-        }
-    },
-
-    onAfgehandeldZakelijkTodoCommand: function() {
-        var queryStatus = "Afgehandeld";
-        var queryType = "Zakelijk";
-        var store = Ext.getStore('TodoStore');
-        store.clearFilter();
-
-        if(queryType){
-            var thisRegExType = new RegExp(queryType, "i");
-            var thisRegExStatus = new RegExp(queryStatus, "i");
-            store.filterBy(function(record) {
-                if (thisRegExType.test(record.get('type'))
-                    &&
-                    thisRegExStatus.test(record.get('status'))
-                    ) {
-                    return true;
-                };
-                return false;
-            });
-        }
-    },
-
-
-
-
 
 
 
@@ -325,7 +192,6 @@ Ext.define("app.controller.TodoController", {
         var errors = currentTodo.validate();
 
         if (!errors.isValid()) {
-            console.log('Aantal errors: ' + errors.length);
             errors.each(function (item, index, length) {
                 Ext.Msg.alert('Mislukt!',item.getMessage(), Ext.emptyFn);
             });
@@ -338,8 +204,8 @@ Ext.define("app.controller.TodoController", {
             todoStore.add(currentTodo);
             todoStore.sync();
             todoStore.sort([{ property: 'korteOmschrijving', direction: 'ASC'}]);
-
             Ext.Msg.alert('Gelukt!', 'Todo succesvol opgeslagen.', function() {});
+
             this.onOnderhandenAlleTodosButtonCommand();
         }
         else if (null != persoonStore.findRecord('todoId', currentTodo.todoId)){
@@ -351,11 +217,17 @@ Ext.define("app.controller.TodoController", {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //persoonDetailsCard handlers/functions                                                                       //
+    //todoDetailsCard handlers/functions                                                                       //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    onBackToTodoOnderhandenCommand: function(){
-        this.onBackToTodoHomeCommand();
+    onBackToTodoLijstCommand: function(){
+        var status = this.getTodoDetailsCard().getValues().status;
+        if (status === "Onderhanden"){
+            this.onOnderhandenAlleTodosButtonCommand("right");
+        }
+        else{
+            this.onAfgehandeldAlleTodosButtonCommand("right");
+        }
     },
 
     onVerwijderTodoCommand: function () {
@@ -365,18 +237,77 @@ Ext.define("app.controller.TodoController", {
 
         Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
             if (msg == "yes"){
-
                 todoStore.remove(currentTodo);
                 todoStore.sync();
+                todoStore.clearFilter();
+                Ext.Msg.alert('Informatie', 'Todo succesvol afgehandeld.');
+                Ext.getCmp('todomain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
             }
             else{
-                console.log("Todo niet verwijderd");
+                Ext.Msg.alert('Informatie', 'Todo verwijderd.');
             }
         });
-        this.onAlleAlleTodosButtonCommand();
     },
 
 
+
+    onMapsTodoCommand: function(){
+        var plaatsOplevering = this.getTodoDetailsCard().getValues().plaatsOplevering;
+        var me = this.getTodoGoogleMapsCard();
+        var addrLookup = plaatsOplevering;
+        var geoCoder = new google.maps.Geocoder();
+        var geoRequest = { address: addrLookup };
+        geoCoder.geocode(geoRequest, function(geoResult, geoStatus) {
+            lat = geoResult[0].geometry.location.lat();
+            lng = geoResult[0].geometry.location.lng();
+            //addr = geoResult[0].formatted_address; console.log(addr);
+            // center the map to the new possition
+            me.setMapOptions({ center: new google.maps.LatLng(lat, lng) });
+        })
+        Ext.getCmp('todomain_card').animateActiveItem(6,{type: 'slide', direction: 'left'});
+    },
+
+    onWijzigTodoCommand: function(){
+        var todoDetailsCard = this.getTodoDetailsCard();
+        var record = todoDetailsCard.getRecord();
+        this.activateTodoEditorCard(record);
+    },
+
+    onAfhandelTodoCommand: function(){
+        var todoDetailsCard = this.getTodoDetailsCard();
+        var currentTodo = todoDetailsCard.getRecord();
+        var todoStore = Ext.getStore("TodoStore");
+
+        Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
+            if (msg == "yes"){
+                currentTodo.set("status", "Afgehandeld");
+                if (null == todoStore.findRecord('todoId', currentTodo.todoId)){
+                    todoStore.add(currentTodo);
+                    todoStore.sync();
+                    todoStore.sort([{ property: 'korteOmschrijving', direction: 'ASC'}]);
+                    Ext.Msg.alert('Gelukt!', 'Todo afgehandeld.', function() {
+                        //TODO
+                    });
+                }
+                else if (null != persoonStore.findRecord('todoId', currentTodo.todoId)){
+                    Ext.Msg.alert('Mistlukt!', 'TodoID bestaat al.');
+                }
+            }
+            else{
+                Ext.Msg.alert('Informatie', 'Todo niet afgehandeld.');
+            }
+        });
+        this.onAfgehandeldAlleTodosButtonCommand();
+    },
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //todoMapsCard handlers/functions                                                                                 //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    onBackToTodoDetailsCommand: function(){
+        Ext.getCmp('todomain_card').animateActiveItem(5,{type: 'slide', direction: 'right'});
+    },
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -395,10 +326,9 @@ Ext.define("app.controller.TodoController", {
     activateTodoDetailsCard: function (record) {
         var todoDetailsCard = this.getTodoDetailsCard();
         var verwijderButton = this.getTodoDetailsCardVerwijderButton();
-        var wijzigButton = this.getTodoDetailsCardWijzigButton()
-        var afhandelButton = this.getTodoDetailsCardAfhandelButton()
+        var wijzigButton = this.getTodoDetailsCardWijzigButton();
+        var afhandelButton = this.getTodoDetailsCardAfhandelButton();
         todoDetailsCard.setRecord(record); // load() is deprecated.
-
         if(record.get("status") === "Afgehandeld"){ //knoppen verbergen
             verwijderButton.hide();
             wijzigButton.hide();
