@@ -1,6 +1,3 @@
-
-
-
 Ext.application({
     name: 'app',
 
@@ -12,21 +9,9 @@ Ext.application({
     requires: ['Ext.Anim'],
 
     launch: function() {
-        if (Ext.os.is.Android) {
-            Ext.Msg.alert("Android detected");
-
-            Ext.Anim.override({
-                disableAnimations:true
-            });
-        }
-        else{
-            Ext.Msg.alert("Another OS detected");
-        }
-
         console.log("app launch");
         Ext.Viewport.add({
              xclass: 'app.view.Main'
         });
     }
 });
-

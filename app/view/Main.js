@@ -4,7 +4,8 @@ Ext.define('app.view.Main', {
     requires: [
         'app.view.HomeMainCard',
         'app.view.PersoonMainCard',
-        'app.view.TodoMainCard'
+        'app.view.TodoMainCard',
+        'Ext.Anim'
     ],
 
     config: {

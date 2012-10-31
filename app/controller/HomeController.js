@@ -1,5 +1,6 @@
 Ext.define("app.controller.HomeController", {
     extend: "Ext.app.Controller",
+    xtype: 'homeController',
 
     config: {
         refs: {
@@ -22,20 +23,22 @@ Ext.define("app.controller.HomeController", {
             resetDataButton: {
                 tap: "resetAllData"
             }
-
         }
     },
+    transition: null,
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Home handlers/functions                                                                                     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     changeScreenToOverPage: function () {
-        Ext.getCmp('homemain_card').animateActiveItem(1,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('homemain_card').animateActiveItem(1, this.transition);
     },
 
     changeScreenToResetPage: function () {
-        Ext.getCmp('homemain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('homemain_card').animateActiveItem(2,this.transition);
     },
 
 
@@ -45,13 +48,18 @@ Ext.define("app.controller.HomeController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     resetAllData: function() {
+        controller = this;
 
         Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
             if (msg == "yes"){
+                var todoStore = Ext.getStore("TodoStore");
                 var persoonStore = Ext.getStore("PersoonStore");
+                todoStore.removeAll();
+                todoStore.sync();
                 persoonStore.removeAll();
                 persoonStore.sync();
-                Ext.getCmp('homemain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
+                controller.checkOS('right');
+                Ext.getCmp('homemain_card').animateActiveItem(0, controller.transition);
                 Ext.Msg.alert('Informatie', 'Data succesvol reset.');
             }
             else{
@@ -67,9 +75,23 @@ Ext.define("app.controller.HomeController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     changeScreenToHomePage: function () {
-        Ext.getCmp('homemain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
+        this.checkOS('right');
+        Ext.getCmp('homemain_card').animateActiveItem(0, this.transition);
     },
 
+    checkOS: function(direction){
+        var slideDirection = direction;
+
+        if (Ext.os.is.Android) {
+            this.transition = { duration: 0, easing: null, type: null, direction: null}
+        }
+        else if (slideDirection === "right" && !Ext.os.is.Android){
+            this.transition = {type: 'slide', direction: 'right'}
+        }
+        else {
+            this.transition = {type: 'slide', direction: 'left'}
+        }
+    },
 
 
     // Base Class functions.

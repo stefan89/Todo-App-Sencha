@@ -54,7 +54,7 @@ Ext.define("app.controller.TodoController", {
             }
         }
     },
-
+    transition: null,
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +99,8 @@ Ext.define("app.controller.TodoController", {
     activateTodoEditorCard: function (record) {
         var todoEditorCard = this.getTodoEditCard();
         todoEditorCard.setRecord(record); // load() is deprecated.
-        Ext.getCmp('todomain_card').animateActiveItem(1,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('todomain_card').animateActiveItem(1, this.transition);
     },
 
 
@@ -112,7 +113,8 @@ Ext.define("app.controller.TodoController", {
     onAlleAlleTodosButtonCommand: function(){
         var store = Ext.getStore('TodoStore');
         store.clearFilter();
-        Ext.getCmp('todomain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('todomain_card').animateActiveItem(2, this.transition);
     },
 
 
@@ -141,7 +143,8 @@ Ext.define("app.controller.TodoController", {
                 return false;
             });
         }
-        Ext.getCmp('todomain_card').animateActiveItem(3,{type: 'slide', direction: slideDirection});
+        this.checkOS(slideDirection);
+        Ext.getCmp('todomain_card').animateActiveItem(3, this.transition);
     },
 
 
@@ -167,7 +170,8 @@ Ext.define("app.controller.TodoController", {
                 return false;
             });
         }
-        Ext.getCmp('todomain_card').animateActiveItem(4,{type: 'slide', direction: slideDirection});
+        this.checkOS(slideDirection);
+        Ext.getCmp('todomain_card').animateActiveItem(4, this.transition);
     },
 
 
@@ -234,17 +238,19 @@ Ext.define("app.controller.TodoController", {
         var todoDetailsCard = this.getTodoDetailsCard();
         var currentTodo = todoDetailsCard.getRecord();
         var todoStore = Ext.getStore("TodoStore");
+        var controller = this;
 
         Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
             if (msg == "yes"){
                 todoStore.remove(currentTodo);
                 todoStore.sync();
                 todoStore.clearFilter();
-                Ext.Msg.alert('Informatie', 'Todo succesvol afgehandeld.');
-                Ext.getCmp('todomain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
+                Ext.Msg.alert('Informatie', 'Todo succesvol verwijderd.');
+                controller.checkOS();
+                Ext.getCmp('todomain_card').animateActiveItem(2, controller.transition);
             }
             else{
-                Ext.Msg.alert('Informatie', 'Todo verwijderd.');
+                Ext.Msg.alert('Informatie', 'Todo niet verwijderd.');
             }
         });
     },
@@ -264,7 +270,8 @@ Ext.define("app.controller.TodoController", {
             // center the map to the new possition
             me.setMapOptions({ center: new google.maps.LatLng(lat, lng) });
         })
-        Ext.getCmp('todomain_card').animateActiveItem(6,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('todomain_card').animateActiveItem(6, this.transition);
     },
 
     onWijzigTodoCommand: function(){
@@ -277,6 +284,7 @@ Ext.define("app.controller.TodoController", {
         var todoDetailsCard = this.getTodoDetailsCard();
         var currentTodo = todoDetailsCard.getRecord();
         var todoStore = Ext.getStore("TodoStore");
+        var controller = this;
 
         Ext.Msg.confirm("Zeker?", "Weet u het zeker?", function(msg) {
             if (msg == "yes"){
@@ -286,7 +294,7 @@ Ext.define("app.controller.TodoController", {
                     todoStore.sync();
                     todoStore.sort([{ property: 'korteOmschrijving', direction: 'ASC'}]);
                     Ext.Msg.alert('Gelukt!', 'Todo afgehandeld.', function() {
-                        //TODO
+                        controller.onAfgehandeldAlleTodosButtonCommand();
                     });
                 }
                 else if (null != persoonStore.findRecord('todoId', currentTodo.todoId)){
@@ -297,7 +305,6 @@ Ext.define("app.controller.TodoController", {
                 Ext.Msg.alert('Informatie', 'Todo niet afgehandeld.');
             }
         });
-        this.onAfgehandeldAlleTodosButtonCommand();
     },
 
 
@@ -306,7 +313,8 @@ Ext.define("app.controller.TodoController", {
     //todoMapsCard handlers/functions                                                                                 //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     onBackToTodoDetailsCommand: function(){
-        Ext.getCmp('todomain_card').animateActiveItem(5,{type: 'slide', direction: 'right'});
+        this.checkOS('right');
+        Ext.getCmp('todomain_card').animateActiveItem(5, this.transition);
     },
 
 
@@ -315,7 +323,8 @@ Ext.define("app.controller.TodoController", {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onBackToTodoHomeCommand: function(){
-        Ext.getCmp('todomain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
+        this.checkOS('right');
+        Ext.getCmp('todomain_card').animateActiveItem(0, this.transition);
     },
 
 
@@ -339,9 +348,23 @@ Ext.define("app.controller.TodoController", {
             wijzigButton.show();
             afhandelButton.show();
         }
-        Ext.getCmp('todomain_card').animateActiveItem(5,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('todomain_card').animateActiveItem(5, this.transition);
     },
 
+    checkOS: function(direction){
+        var slideDirection = direction;
+
+        if (Ext.os.is.Android) {
+            this.transition = { duration: 0, easing: null, type: null, direction: null}
+        }
+        else if (slideDirection === "right" && !Ext.os.is.Android){
+            this.transition = {type: 'slide', direction: 'right'}
+        }
+        else {
+            this.transition = {type: 'slide', direction: 'left'}
+        }
+    },
 
     // Base Class functions.
     launch: function () {

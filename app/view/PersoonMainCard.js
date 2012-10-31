@@ -13,8 +13,8 @@ Ext.define('app.view.PersoonMainCard', {
         html: '...',
         styleHtmlContent: true,
         layout:{
-            type:'card',
-            animation:'slide'
+            type:'card'
+            //animation:'slide'
         },
         id:'persoonmain_card',
         items: [

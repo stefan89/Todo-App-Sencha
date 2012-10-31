@@ -65,7 +65,7 @@ Ext.define("app.view.TodoEditor", {
 
                             var selecteddatum = this.getValue();
                             if (selecteddatum < minimumdatum){
-                                Ext.Msg.alert('Oops!', 'Datum afgekeurd', Ext.emptyFn);
+                                Ext.Msg.alert('Mislukt!', 'Gekozen datum mag niet voor huidige datum zijn.', Ext.emptyFn);
                                 picker.reset();
                             }
                             else if (selecteddatum >= minimumdatum){

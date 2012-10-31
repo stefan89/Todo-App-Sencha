@@ -41,7 +41,7 @@ Ext.define("app.controller.TodoLijstFilterController", {
             }
         }
     },
-
+    transition: null,
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //todoLijstAlle handlers/functions                                                                             //
@@ -52,7 +52,8 @@ Ext.define("app.controller.TodoLijstFilterController", {
         var store = Ext.getStore('TodoStore');
         searchfield.reset();
         store.clearFilter();
-        Ext.getCmp('todomain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('todomain_card').animateActiveItem(2, this.transition);
     },
 
 
@@ -199,7 +200,8 @@ Ext.define("app.controller.TodoLijstFilterController", {
                 return false;
             });
         }
-        Ext.getCmp('todomain_card').animateActiveItem(3,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('todomain_card').animateActiveItem(3, this.transition);
     },
 
     onOnderhandenPriveTodoCommand: function() {
@@ -374,7 +376,8 @@ Ext.define("app.controller.TodoLijstFilterController", {
                 return false;
             });
         }
-        Ext.getCmp('todomain_card').animateActiveItem(4,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('todomain_card').animateActiveItem(4, this.transition);
     },
 
     onAfgehandeldPriveTodoCommand: function() {
@@ -519,6 +522,21 @@ Ext.define("app.controller.TodoLijstFilterController", {
                     return false;
                 });
             }
+        }
+    },
+
+
+    checkOS: function(direction){
+        var slideDirection = direction;
+
+        if (Ext.os.is.Android) {
+            this.transition = { duration: 0, easing: null, type: null, direction: null}
+        }
+        else if (slideDirection === "right" && !Ext.os.is.Android){
+            this.transition = {type: 'slide', direction: 'right'}
+        }
+        else {
+            this.transition = {type: 'slide', direction: 'left'}
         }
     },
 

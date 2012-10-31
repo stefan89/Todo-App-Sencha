@@ -71,7 +71,7 @@
                                 var minimumdatum = new Date(datumVandaag.getFullYear()-18, datumVandaag.getMonth(), datumVandaag.getDate());
                                 var selecteddatum = this.getValue();
                                 if (selecteddatum > minimumdatum){
-                                    Ext.Msg.alert('Oops!', 'Minimum leeftijd is 18 jaar', Ext.emptyFn);
+                                    Ext.Msg.alert('Mislukt!', 'Minimum leeftijd is 18 jaar', Ext.emptyFn);
                                     picker.reset();
                                 }
                                 else if (selecteddatum <= minimumdatum){

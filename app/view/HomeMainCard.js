@@ -12,8 +12,8 @@ Ext.define('app.view.HomeMainCard', {
         html: 'Dit is de home main pagina',
         styleHtmlContent: true,
         layout:{
-            type:'card',
-            animation:'slide'
+            type:'card'
+            //animation:'slide'
         },
         id:'homemain_card',
         items: [

@@ -22,8 +22,7 @@
             }
         }
     },
-
-
+    transition: null,
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //persoonLijstCard handlers/functions                                                                         //
@@ -84,14 +83,16 @@
     activatePersoonDetailsCard: function (record) {
         var persoonDetailsCard = this.getPersoonDetailsCard();
         persoonDetailsCard.setRecord(record);
-        Ext.getCmp('persoonmain_card').animateActiveItem(2,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('persoonmain_card').animateActiveItem(2, this.transition);
     },
 
 
     activatePersoonEditorCard: function (record) {
         var persoonEditorCard = this.getPersoonEditCard();
         persoonEditorCard.setRecord(record);
-        Ext.getCmp('persoonmain_card').animateActiveItem(1,{type: 'slide', direction: 'left'});
+        this.checkOS();
+        Ext.getCmp('persoonmain_card').animateActiveItem(1, this.transition);
     },
 
 
@@ -152,13 +153,13 @@
     },
 
 
-    activatePersoonLijstCard: function () {
-        Ext.getCmp('persoonmain_card').animateActiveItem(0,{type: 'slide', direction: 'right'});
-    },
-
-
-    onBackToPersoonHomeCommand: function () {
-        this.activatePersoonLijstCard();
+    activatePersoonLijstCard: function (direction) {
+        var slideDirection = 'left';
+        if (direction === "right"){
+            slideDirection = "right";
+        }
+        this.checkOS(slideDirection);
+        Ext.getCmp('persoonmain_card').animateActiveItem(0, this.transition);
     },
 
 
@@ -167,7 +168,21 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onBackToPersoonHomeCommand: function () {
-        this.activatePersoonLijstCard();
+        this.activatePersoonLijstCard("right");
+    },
+
+    checkOS: function(direction){
+        var slideDirection = direction;
+
+        if (Ext.os.is.Android) {
+            this.transition = { duration: 0, easing: null, type: null, direction: null}
+        }
+        else if (slideDirection === "right" && !Ext.os.is.Android){
+            this.transition = {type: 'slide', direction: 'right'}
+        }
+        else {
+            this.transition = {type: 'slide', direction: 'left'}
+        }
     },
 
 
