@@ -14,7 +14,6 @@ Ext.define('app.view.PersoonMainCard', {
         styleHtmlContent: true,
         layout:{
             type:'card'
-            //animation:'slide'
         },
         id:'persoonmain_card',
         items: [

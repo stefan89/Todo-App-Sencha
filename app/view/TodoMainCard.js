@@ -18,7 +18,6 @@ Ext.define('app.view.TodoMainCard', {
         styleHtmlContent: true,
         layout:{
             type:'card'
-            //animation:'slide'
         },
         id:'todomain_card',
         items: [

@@ -13,7 +13,6 @@ Ext.define('app.view.HomeMainCard', {
         styleHtmlContent: true,
         layout:{
             type:'card'
-            //animation:'slide'
         },
         id:'homemain_card',
         items: [
